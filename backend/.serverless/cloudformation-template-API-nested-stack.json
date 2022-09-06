@@ -1,0 +1,802 @@
+{
+  "AWSTemplateFormatVersion": "2010-09-09",
+  "Description": "APINestedStack nested stack",
+  "Parameters": {},
+  "Resources": {
+    "ApiGatewayResourceAgmdoc": {
+      "Type": "AWS::ApiGateway::Resource",
+      "Properties": {
+        "ParentId": {
+          "Fn::GetAtt": [
+            "ApiGatewayRestApi",
+            "RootResourceId"
+          ]
+        },
+        "PathPart": "agmdoc",
+        "RestApiId": {
+          "Ref": "ApiGatewayRestApi"
+        }
+      },
+      "DependsOn": []
+    },
+    "ApiGatewayResourceCategories": {
+      "Type": "AWS::ApiGateway::Resource",
+      "Properties": {
+        "ParentId": {
+          "Fn::GetAtt": [
+            "ApiGatewayRestApi",
+            "RootResourceId"
+          ]
+        },
+        "PathPart": "categories",
+        "RestApiId": {
+          "Ref": "ApiGatewayRestApi"
+        }
+      },
+      "DependsOn": []
+    },
+    "ApiGatewayResourceCategoriesIdVar": {
+      "Type": "AWS::ApiGateway::Resource",
+      "Properties": {
+        "ParentId": {
+          "Ref": "ApiGatewayResourceCategories"
+        },
+        "PathPart": "{id}",
+        "RestApiId": {
+          "Ref": "ApiGatewayRestApi"
+        }
+      },
+      "DependsOn": []
+    },
+    "ApiGatewayResourceConfigurations": {
+      "Type": "AWS::ApiGateway::Resource",
+      "Properties": {
+        "ParentId": {
+          "Fn::GetAtt": [
+            "ApiGatewayRestApi",
+            "RootResourceId"
+          ]
+        },
+        "PathPart": "configurations",
+        "RestApiId": {
+          "Ref": "ApiGatewayRestApi"
+        }
+      },
+      "DependsOn": []
+    },
+    "ApiGatewayResourceDepartments": {
+      "Type": "AWS::ApiGateway::Resource",
+      "Properties": {
+        "ParentId": {
+          "Fn::GetAtt": [
+            "ApiGatewayRestApi",
+            "RootResourceId"
+          ]
+        },
+        "PathPart": "departments",
+        "RestApiId": {
+          "Ref": "ApiGatewayRestApi"
+        }
+      },
+      "DependsOn": []
+    },
+    "ApiGatewayResourceDepartmentsIdVar": {
+      "Type": "AWS::ApiGateway::Resource",
+      "Properties": {
+        "ParentId": {
+          "Ref": "ApiGatewayResourceDepartments"
+        },
+        "PathPart": "{id}",
+        "RestApiId": {
+          "Ref": "ApiGatewayRestApi"
+        }
+      },
+      "DependsOn": []
+    },
+    "ApiGatewayResourceInteractions": {
+      "Type": "AWS::ApiGateway::Resource",
+      "Properties": {
+        "ParentId": {
+          "Fn::GetAtt": [
+            "ApiGatewayRestApi",
+            "RootResourceId"
+          ]
+        },
+        "PathPart": "interactions",
+        "RestApiId": {
+          "Ref": "ApiGatewayRestApi"
+        }
+      },
+      "DependsOn": []
+    },
+    "ApiGatewayResourceInteractionsIdVar": {
+      "Type": "AWS::ApiGateway::Resource",
+      "Properties": {
+        "ParentId": {
+          "Ref": "ApiGatewayResourceInteractions"
+        },
+        "PathPart": "{id}",
+        "RestApiId": {
+          "Ref": "ApiGatewayRestApi"
+        }
+      },
+      "DependsOn": []
+    },
+    "ApiGatewayResourceInteractionsProperty": {
+      "Type": "AWS::ApiGateway::Resource",
+      "Properties": {
+        "ParentId": {
+          "Ref": "ApiGatewayResourceInteractions"
+        },
+        "PathPart": "property",
+        "RestApiId": {
+          "Ref": "ApiGatewayRestApi"
+        }
+      },
+      "DependsOn": []
+    },
+    "ApiGatewayResourceInteractionsPropertyIdVar": {
+      "Type": "AWS::ApiGateway::Resource",
+      "Properties": {
+        "ParentId": {
+          "Ref": "ApiGatewayResourceInteractionsProperty"
+        },
+        "PathPart": "{id}",
+        "RestApiId": {
+          "Ref": "ApiGatewayRestApi"
+        }
+      },
+      "DependsOn": []
+    },
+    "ApiGatewayResourceInteractionsUser": {
+      "Type": "AWS::ApiGateway::Resource",
+      "Properties": {
+        "ParentId": {
+          "Ref": "ApiGatewayResourceInteractions"
+        },
+        "PathPart": "user",
+        "RestApiId": {
+          "Ref": "ApiGatewayRestApi"
+        }
+      },
+      "DependsOn": []
+    },
+    "ApiGatewayResourceInteractionsUserIdVar": {
+      "Type": "AWS::ApiGateway::Resource",
+      "Properties": {
+        "ParentId": {
+          "Ref": "ApiGatewayResourceInteractionsUser"
+        },
+        "PathPart": "{id}",
+        "RestApiId": {
+          "Ref": "ApiGatewayRestApi"
+        }
+      },
+      "DependsOn": []
+    },
+    "ApiGatewayResourceInteractionsZapier": {
+      "Type": "AWS::ApiGateway::Resource",
+      "Properties": {
+        "ParentId": {
+          "Ref": "ApiGatewayResourceInteractions"
+        },
+        "PathPart": "zapier",
+        "RestApiId": {
+          "Ref": "ApiGatewayRestApi"
+        }
+      },
+      "DependsOn": []
+    },
+    "ApiGatewayResourceIssues": {
+      "Type": "AWS::ApiGateway::Resource",
+      "Properties": {
+        "ParentId": {
+          "Fn::GetAtt": [
+            "ApiGatewayRestApi",
+            "RootResourceId"
+          ]
+        },
+        "PathPart": "issues",
+        "RestApiId": {
+          "Ref": "ApiGatewayRestApi"
+        }
+      },
+      "DependsOn": []
+    },
+    "ApiGatewayResourceIssuesGetDashbyDashref": {
+      "Type": "AWS::ApiGateway::Resource",
+      "Properties": {
+        "ParentId": {
+          "Ref": "ApiGatewayResourceIssues"
+        },
+        "PathPart": "get-by-ref",
+        "RestApiId": {
+          "Ref": "ApiGatewayRestApi"
+        }
+      },
+      "DependsOn": []
+    },
+    "ApiGatewayResourceIssuesGetDashbyDashrefRefnumberVar": {
+      "Type": "AWS::ApiGateway::Resource",
+      "Properties": {
+        "ParentId": {
+          "Ref": "ApiGatewayResourceIssuesGetDashbyDashref"
+        },
+        "PathPart": "{refNumber}",
+        "RestApiId": {
+          "Ref": "ApiGatewayRestApi"
+        }
+      },
+      "DependsOn": []
+    },
+    "ApiGatewayResourceIssuesIdVar": {
+      "Type": "AWS::ApiGateway::Resource",
+      "Properties": {
+        "ParentId": {
+          "Ref": "ApiGatewayResourceIssues"
+        },
+        "PathPart": "{id}",
+        "RestApiId": {
+          "Ref": "ApiGatewayRestApi"
+        }
+      },
+      "DependsOn": []
+    },
+    "ApiGatewayResourceIssuesIdVarAddDashassignee": {
+      "Type": "AWS::ApiGateway::Resource",
+      "Properties": {
+        "ParentId": {
+          "Ref": "ApiGatewayResourceIssuesIdVar"
+        },
+        "PathPart": "add-assignee",
+        "RestApiId": {
+          "Ref": "ApiGatewayRestApi"
+        }
+      },
+      "DependsOn": []
+    },
+    "ApiGatewayResourceIssuesIdVarAddDashjobDashreference": {
+      "Type": "AWS::ApiGateway::Resource",
+      "Properties": {
+        "ParentId": {
+          "Ref": "ApiGatewayResourceIssuesIdVar"
+        },
+        "PathPart": "add-job-reference",
+        "RestApiId": {
+          "Ref": "ApiGatewayRestApi"
+        }
+      },
+      "DependsOn": []
+    },
+    "ApiGatewayResourceIssuesIdVarChangeDashstatus": {
+      "Type": "AWS::ApiGateway::Resource",
+      "Properties": {
+        "ParentId": {
+          "Ref": "ApiGatewayResourceIssuesIdVar"
+        },
+        "PathPart": "change-status",
+        "RestApiId": {
+          "Ref": "ApiGatewayRestApi"
+        }
+      },
+      "DependsOn": []
+    },
+    "ApiGatewayResourceIssuesIdVarComments": {
+      "Type": "AWS::ApiGateway::Resource",
+      "Properties": {
+        "ParentId": {
+          "Ref": "ApiGatewayResourceIssuesIdVar"
+        },
+        "PathPart": "comments",
+        "RestApiId": {
+          "Ref": "ApiGatewayRestApi"
+        }
+      },
+      "DependsOn": []
+    },
+    "ApiGatewayResourceIssuesUserDashissues": {
+      "Type": "AWS::ApiGateway::Resource",
+      "Properties": {
+        "ParentId": {
+          "Ref": "ApiGatewayResourceIssues"
+        },
+        "PathPart": "user-issues",
+        "RestApiId": {
+          "Ref": "ApiGatewayRestApi"
+        }
+      },
+      "DependsOn": []
+    },
+    "ApiGatewayResourceIssuesUserDashissuesUseridVar": {
+      "Type": "AWS::ApiGateway::Resource",
+      "Properties": {
+        "ParentId": {
+          "Ref": "ApiGatewayResourceIssuesUserDashissues"
+        },
+        "PathPart": "{userId}",
+        "RestApiId": {
+          "Ref": "ApiGatewayRestApi"
+        }
+      },
+      "DependsOn": []
+    },
+    "ApiGatewayResourceMailDashsubscribers": {
+      "Type": "AWS::ApiGateway::Resource",
+      "Properties": {
+        "ParentId": {
+          "Fn::GetAtt": [
+            "ApiGatewayRestApi",
+            "RootResourceId"
+          ]
+        },
+        "PathPart": "mail-subscribers",
+        "RestApiId": {
+          "Ref": "ApiGatewayRestApi"
+        }
+      },
+      "DependsOn": []
+    },
+    "ApiGatewayResourceNewsletters": {
+      "Type": "AWS::ApiGateway::Resource",
+      "Properties": {
+        "ParentId": {
+          "Fn::GetAtt": [
+            "ApiGatewayRestApi",
+            "RootResourceId"
+          ]
+        },
+        "PathPart": "newsletters",
+        "RestApiId": {
+          "Ref": "ApiGatewayRestApi"
+        }
+      },
+      "DependsOn": []
+    },
+    "ApiGatewayResourceNewslettersIdVar": {
+      "Type": "AWS::ApiGateway::Resource",
+      "Properties": {
+        "ParentId": {
+          "Ref": "ApiGatewayResourceNewsletters"
+        },
+        "PathPart": "{id}",
+        "RestApiId": {
+          "Ref": "ApiGatewayRestApi"
+        }
+      },
+      "DependsOn": []
+    },
+    "ApiGatewayResourceProperties": {
+      "Type": "AWS::ApiGateway::Resource",
+      "Properties": {
+        "ParentId": {
+          "Fn::GetAtt": [
+            "ApiGatewayRestApi",
+            "RootResourceId"
+          ]
+        },
+        "PathPart": "properties",
+        "RestApiId": {
+          "Ref": "ApiGatewayRestApi"
+        }
+      },
+      "DependsOn": []
+    },
+    "ApiGatewayResourcePropertiesIdVar": {
+      "Type": "AWS::ApiGateway::Resource",
+      "Properties": {
+        "ParentId": {
+          "Ref": "ApiGatewayResourceProperties"
+        },
+        "PathPart": "{id}",
+        "RestApiId": {
+          "Ref": "ApiGatewayRestApi"
+        }
+      },
+      "DependsOn": []
+    },
+    "ApiGatewayResourcePropertiesIdVarBuilding": {
+      "Type": "AWS::ApiGateway::Resource",
+      "Properties": {
+        "ParentId": {
+          "Ref": "ApiGatewayResourcePropertiesIdVar"
+        },
+        "PathPart": "building",
+        "RestApiId": {
+          "Ref": "ApiGatewayRestApi"
+        }
+      },
+      "DependsOn": []
+    },
+    "ApiGatewayResourcePropertiesIdVarFlag": {
+      "Type": "AWS::ApiGateway::Resource",
+      "Properties": {
+        "ParentId": {
+          "Ref": "ApiGatewayResourcePropertiesIdVar"
+        },
+        "PathPart": "flag",
+        "RestApiId": {
+          "Ref": "ApiGatewayRestApi"
+        }
+      },
+      "DependsOn": []
+    },
+    "ApiGatewayResourcePropertiesIdVarLevy": {
+      "Type": "AWS::ApiGateway::Resource",
+      "Properties": {
+        "ParentId": {
+          "Ref": "ApiGatewayResourcePropertiesIdVar"
+        },
+        "PathPart": "levy",
+        "RestApiId": {
+          "Ref": "ApiGatewayRestApi"
+        }
+      },
+      "DependsOn": []
+    },
+    "ApiGatewayResourcePropertiesIdVarOwner": {
+      "Type": "AWS::ApiGateway::Resource",
+      "Properties": {
+        "ParentId": {
+          "Ref": "ApiGatewayResourcePropertiesIdVar"
+        },
+        "PathPart": "owner",
+        "RestApiId": {
+          "Ref": "ApiGatewayRestApi"
+        }
+      },
+      "DependsOn": []
+    },
+    "ApiGatewayResourcePropertiesUnverified": {
+      "Type": "AWS::ApiGateway::Resource",
+      "Properties": {
+        "ParentId": {
+          "Ref": "ApiGatewayResourceProperties"
+        },
+        "PathPart": "unverified",
+        "RestApiId": {
+          "Ref": "ApiGatewayRestApi"
+        }
+      },
+      "DependsOn": []
+    },
+    "ApiGatewayResourcePropertiesVerificationDashreset": {
+      "Type": "AWS::ApiGateway::Resource",
+      "Properties": {
+        "ParentId": {
+          "Ref": "ApiGatewayResourceProperties"
+        },
+        "PathPart": "verification-reset",
+        "RestApiId": {
+          "Ref": "ApiGatewayRestApi"
+        }
+      },
+      "DependsOn": []
+    },
+    "ApiGatewayResourcePropertiesVerificationsDashreminder": {
+      "Type": "AWS::ApiGateway::Resource",
+      "Properties": {
+        "ParentId": {
+          "Ref": "ApiGatewayResourceProperties"
+        },
+        "PathPart": "verifications-reminder",
+        "RestApiId": {
+          "Ref": "ApiGatewayRestApi"
+        }
+      },
+      "DependsOn": []
+    },
+    "ApiGatewayResourceRatenewsletter": {
+      "Type": "AWS::ApiGateway::Resource",
+      "Properties": {
+        "ParentId": {
+          "Fn::GetAtt": [
+            "ApiGatewayRestApi",
+            "RootResourceId"
+          ]
+        },
+        "PathPart": "rateNewsletter",
+        "RestApiId": {
+          "Ref": "ApiGatewayRestApi"
+        }
+      },
+      "DependsOn": []
+    },
+    "ApiGatewayResourceRoles": {
+      "Type": "AWS::ApiGateway::Resource",
+      "Properties": {
+        "ParentId": {
+          "Fn::GetAtt": [
+            "ApiGatewayRestApi",
+            "RootResourceId"
+          ]
+        },
+        "PathPart": "roles",
+        "RestApiId": {
+          "Ref": "ApiGatewayRestApi"
+        }
+      },
+      "DependsOn": []
+    },
+    "ApiGatewayResourceRolesIdVar": {
+      "Type": "AWS::ApiGateway::Resource",
+      "Properties": {
+        "ParentId": {
+          "Ref": "ApiGatewayResourceRoles"
+        },
+        "PathPart": "{id}",
+        "RestApiId": {
+          "Ref": "ApiGatewayRestApi"
+        }
+      },
+      "DependsOn": []
+    },
+    "ApiGatewayResourceRsvp": {
+      "Type": "AWS::ApiGateway::Resource",
+      "Properties": {
+        "ParentId": {
+          "Fn::GetAtt": [
+            "ApiGatewayRestApi",
+            "RootResourceId"
+          ]
+        },
+        "PathPart": "rsvp",
+        "RestApiId": {
+          "Ref": "ApiGatewayRestApi"
+        }
+      },
+      "DependsOn": []
+    },
+    "ApiGatewayResourceRsvpIdVar": {
+      "Type": "AWS::ApiGateway::Resource",
+      "Properties": {
+        "ParentId": {
+          "Ref": "ApiGatewayResourceRsvp"
+        },
+        "PathPart": "{id}",
+        "RestApiId": {
+          "Ref": "ApiGatewayRestApi"
+        }
+      },
+      "DependsOn": []
+    },
+    "ApiGatewayResourceUsers": {
+      "Type": "AWS::ApiGateway::Resource",
+      "Properties": {
+        "ParentId": {
+          "Fn::GetAtt": [
+            "ApiGatewayRestApi",
+            "RootResourceId"
+          ]
+        },
+        "PathPart": "users",
+        "RestApiId": {
+          "Ref": "ApiGatewayRestApi"
+        }
+      },
+      "DependsOn": []
+    },
+    "ApiGatewayResourceUsersIdVar": {
+      "Type": "AWS::ApiGateway::Resource",
+      "Properties": {
+        "ParentId": {
+          "Ref": "ApiGatewayResourceUsers"
+        },
+        "PathPart": "{id}",
+        "RestApiId": {
+          "Ref": "ApiGatewayRestApi"
+        }
+      },
+      "DependsOn": []
+    },
+    "ApiGatewayRestApi": {
+      "Type": "AWS::ApiGateway::RestApi",
+      "Properties": {
+        "Name": "prod-wynberg-manage-my-area",
+        "EndpointConfiguration": {
+          "Types": [
+            "EDGE"
+          ]
+        },
+        "Policy": ""
+      },
+      "DependsOn": []
+    }
+  },
+  "Outputs": {
+    "ApiGatewayRestApi": {
+      "Value": {
+        "Ref": "ApiGatewayRestApi"
+      }
+    },
+    "ApiGatewayResourceConfigurations": {
+      "Value": {
+        "Ref": "ApiGatewayResourceConfigurations"
+      }
+    },
+    "ApiGatewayResourceIssues": {
+      "Value": {
+        "Ref": "ApiGatewayResourceIssues"
+      }
+    },
+    "ApiGatewayResourceIssuesIdVar": {
+      "Value": {
+        "Ref": "ApiGatewayResourceIssuesIdVar"
+      }
+    },
+    "ApiGatewayResourceIssuesUserDashissuesUseridVar": {
+      "Value": {
+        "Ref": "ApiGatewayResourceIssuesUserDashissuesUseridVar"
+      }
+    },
+    "ApiGatewayResourceIssuesIdVarComments": {
+      "Value": {
+        "Ref": "ApiGatewayResourceIssuesIdVarComments"
+      }
+    },
+    "ApiGatewayResourceIssuesIdVarAddDashassignee": {
+      "Value": {
+        "Ref": "ApiGatewayResourceIssuesIdVarAddDashassignee"
+      }
+    },
+    "ApiGatewayResourceIssuesIdVarChangeDashstatus": {
+      "Value": {
+        "Ref": "ApiGatewayResourceIssuesIdVarChangeDashstatus"
+      }
+    },
+    "ApiGatewayResourceIssuesGetDashbyDashrefRefnumberVar": {
+      "Value": {
+        "Ref": "ApiGatewayResourceIssuesGetDashbyDashrefRefnumberVar"
+      }
+    },
+    "ApiGatewayResourceIssuesIdVarAddDashjobDashreference": {
+      "Value": {
+        "Ref": "ApiGatewayResourceIssuesIdVarAddDashjobDashreference"
+      }
+    },
+    "ApiGatewayResourceCategories": {
+      "Value": {
+        "Ref": "ApiGatewayResourceCategories"
+      }
+    },
+    "ApiGatewayResourceCategoriesIdVar": {
+      "Value": {
+        "Ref": "ApiGatewayResourceCategoriesIdVar"
+      }
+    },
+    "ApiGatewayResourceDepartments": {
+      "Value": {
+        "Ref": "ApiGatewayResourceDepartments"
+      }
+    },
+    "ApiGatewayResourceDepartmentsIdVar": {
+      "Value": {
+        "Ref": "ApiGatewayResourceDepartmentsIdVar"
+      }
+    },
+    "ApiGatewayResourcePropertiesVerificationsDashreminder": {
+      "Value": {
+        "Ref": "ApiGatewayResourcePropertiesVerificationsDashreminder"
+      }
+    },
+    "ApiGatewayResourceRoles": {
+      "Value": {
+        "Ref": "ApiGatewayResourceRoles"
+      }
+    },
+    "ApiGatewayResourceRolesIdVar": {
+      "Value": {
+        "Ref": "ApiGatewayResourceRolesIdVar"
+      }
+    },
+    "ApiGatewayResourceUsers": {
+      "Value": {
+        "Ref": "ApiGatewayResourceUsers"
+      }
+    },
+    "ApiGatewayResourceUsersIdVar": {
+      "Value": {
+        "Ref": "ApiGatewayResourceUsersIdVar"
+      }
+    },
+    "ApiGatewayResourceProperties": {
+      "Value": {
+        "Ref": "ApiGatewayResourceProperties"
+      }
+    },
+    "ApiGatewayResourcePropertiesIdVar": {
+      "Value": {
+        "Ref": "ApiGatewayResourcePropertiesIdVar"
+      }
+    },
+    "ApiGatewayResourcePropertiesIdVarBuilding": {
+      "Value": {
+        "Ref": "ApiGatewayResourcePropertiesIdVarBuilding"
+      }
+    },
+    "ApiGatewayResourcePropertiesIdVarLevy": {
+      "Value": {
+        "Ref": "ApiGatewayResourcePropertiesIdVarLevy"
+      }
+    },
+    "ApiGatewayResourcePropertiesIdVarOwner": {
+      "Value": {
+        "Ref": "ApiGatewayResourcePropertiesIdVarOwner"
+      }
+    },
+    "ApiGatewayResourcePropertiesUnverified": {
+      "Value": {
+        "Ref": "ApiGatewayResourcePropertiesUnverified"
+      }
+    },
+    "ApiGatewayResourcePropertiesVerificationDashreset": {
+      "Value": {
+        "Ref": "ApiGatewayResourcePropertiesVerificationDashreset"
+      }
+    },
+    "ApiGatewayResourcePropertiesIdVarFlag": {
+      "Value": {
+        "Ref": "ApiGatewayResourcePropertiesIdVarFlag"
+      }
+    },
+    "ApiGatewayResourceNewsletters": {
+      "Value": {
+        "Ref": "ApiGatewayResourceNewsletters"
+      }
+    },
+    "ApiGatewayResourceNewslettersIdVar": {
+      "Value": {
+        "Ref": "ApiGatewayResourceNewslettersIdVar"
+      }
+    },
+    "ApiGatewayResourceRatenewsletter": {
+      "Value": {
+        "Ref": "ApiGatewayResourceRatenewsletter"
+      }
+    },
+    "ApiGatewayResourceRsvp": {
+      "Value": {
+        "Ref": "ApiGatewayResourceRsvp"
+      }
+    },
+    "ApiGatewayResourceRsvpIdVar": {
+      "Value": {
+        "Ref": "ApiGatewayResourceRsvpIdVar"
+      }
+    },
+    "ApiGatewayResourceInteractions": {
+      "Value": {
+        "Ref": "ApiGatewayResourceInteractions"
+      }
+    },
+    "ApiGatewayResourceInteractionsIdVar": {
+      "Value": {
+        "Ref": "ApiGatewayResourceInteractionsIdVar"
+      }
+    },
+    "ApiGatewayResourceInteractionsUserIdVar": {
+      "Value": {
+        "Ref": "ApiGatewayResourceInteractionsUserIdVar"
+      }
+    },
+    "ApiGatewayResourceInteractionsPropertyIdVar": {
+      "Value": {
+        "Ref": "ApiGatewayResourceInteractionsPropertyIdVar"
+      }
+    },
+    "ApiGatewayResourceInteractionsZapier": {
+      "Value": {
+        "Ref": "ApiGatewayResourceInteractionsZapier"
+      }
+    },
+    "ApiGatewayResourceAgmdoc": {
+      "Value": {
+        "Ref": "ApiGatewayResourceAgmdoc"
+      }
+    },
+    "ApiGatewayResourceMailDashsubscribers": {
+      "Value": {
+        "Ref": "ApiGatewayResourceMailDashsubscribers"
+      }
+    }
+  }
+}
