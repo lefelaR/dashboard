@@ -1,0 +1,371 @@
+{
+  "AWSTemplateFormatVersion": "2010-09-09",
+  "Description": "VersionsNestedStack nested stack",
+  "Parameters": {
+    "CreateRoleLambdaFunctionParameter": {
+      "Type": "String"
+    },
+    "UpdateRoleLambdaFunctionParameter": {
+      "Type": "String"
+    },
+    "DeleteRoleLambdaFunctionParameter": {
+      "Type": "String"
+    },
+    "GetRoleLambdaFunctionParameter": {
+      "Type": "String"
+    },
+    "GetAllRolesLambdaFunctionParameter": {
+      "Type": "String"
+    },
+    "AdduserLambdaFunctionParameter": {
+      "Type": "String"
+    },
+    "GetAllUsersLambdaFunctionParameter": {
+      "Type": "String"
+    },
+    "GetUserLambdaFunctionParameter": {
+      "Type": "String"
+    },
+    "UpdateUserLambdaFunctionParameter": {
+      "Type": "String"
+    },
+    "GetAllNewslettersLambdaFunctionParameter": {
+      "Type": "String"
+    },
+    "PostNewsletterLambdaFunctionParameter": {
+      "Type": "String"
+    },
+    "DeleteNewsletterLambdaFunctionParameter": {
+      "Type": "String"
+    },
+    "EditNewsletterLambdaFunctionParameter": {
+      "Type": "String"
+    },
+    "GetArticleLambdaFunctionParameter": {
+      "Type": "String"
+    },
+    "RateNewsletterLambdaFunctionParameter": {
+      "Type": "String"
+    },
+    "AddSubscriberLambdaFunctionParameter": {
+      "Type": "String"
+    },
+    "GetAllMembersLambdaFunctionParameter": {
+      "Type": "String"
+    },
+    "AddItemLambdaFunctionParameter": {
+      "Type": "String"
+    },
+    "GetAllItemsLambdaFunctionParameter": {
+      "Type": "String"
+    }
+  },
+  "Resources": {
+    "CreateRoleLambdaVersionhpZyYQgndQECwwalVZJpZBQPyOagsqXyqCW3mOcD61I": {
+      "Type": "AWS::Lambda::Version",
+      "DeletionPolicy": "Retain",
+      "Properties": {
+        "FunctionName": {
+          "Ref": "CreateRoleLambdaFunctionParameter"
+        },
+        "CodeSha256": "tz4Y8oV6W5yMfoXhj+/03FlGVN22nEFqwZB3XeTdE2Q="
+      },
+      "DependsOn": []
+    },
+    "UpdateRoleLambdaVersionEwX6uKs8JnGWLZq1bp8L8M84w1E6ZT3wCOsDb71QAk": {
+      "Type": "AWS::Lambda::Version",
+      "DeletionPolicy": "Retain",
+      "Properties": {
+        "FunctionName": {
+          "Ref": "UpdateRoleLambdaFunctionParameter"
+        },
+        "CodeSha256": "tz4Y8oV6W5yMfoXhj+/03FlGVN22nEFqwZB3XeTdE2Q="
+      },
+      "DependsOn": []
+    },
+    "DeleteRoleLambdaVersion7pFXgbVTzsDx2bNVWVvURhgG46GwXqIShxhNunnDzc": {
+      "Type": "AWS::Lambda::Version",
+      "DeletionPolicy": "Retain",
+      "Properties": {
+        "FunctionName": {
+          "Ref": "DeleteRoleLambdaFunctionParameter"
+        },
+        "CodeSha256": "tz4Y8oV6W5yMfoXhj+/03FlGVN22nEFqwZB3XeTdE2Q="
+      },
+      "DependsOn": []
+    },
+    "GetRoleLambdaVersionvxnQaF5C5yh3sVj72E3mlqgVWqDMpjqsRiuVtGb87g": {
+      "Type": "AWS::Lambda::Version",
+      "DeletionPolicy": "Retain",
+      "Properties": {
+        "FunctionName": {
+          "Ref": "GetRoleLambdaFunctionParameter"
+        },
+        "CodeSha256": "tz4Y8oV6W5yMfoXhj+/03FlGVN22nEFqwZB3XeTdE2Q="
+      },
+      "DependsOn": []
+    },
+    "GetAllRolesLambdaVersionNtHCBE96f9PUCIeRu8CCxti3dpKQWeVVm3mQzCyNFc": {
+      "Type": "AWS::Lambda::Version",
+      "DeletionPolicy": "Retain",
+      "Properties": {
+        "FunctionName": {
+          "Ref": "GetAllRolesLambdaFunctionParameter"
+        },
+        "CodeSha256": "tz4Y8oV6W5yMfoXhj+/03FlGVN22nEFqwZB3XeTdE2Q="
+      },
+      "DependsOn": []
+    },
+    "AdduserLambdaVersionPb6yJHkdtDFIkfCeu0yYOzSdKaNaqyGBVF7Lfc": {
+      "Type": "AWS::Lambda::Version",
+      "DeletionPolicy": "Retain",
+      "Properties": {
+        "FunctionName": {
+          "Ref": "AdduserLambdaFunctionParameter"
+        },
+        "CodeSha256": "tz4Y8oV6W5yMfoXhj+/03FlGVN22nEFqwZB3XeTdE2Q="
+      },
+      "DependsOn": []
+    },
+    "GetAllUsersLambdaVersionbKttq6fnZQvugpBZGux7vQG9UmPhatlb0yOb73cno": {
+      "Type": "AWS::Lambda::Version",
+      "DeletionPolicy": "Retain",
+      "Properties": {
+        "FunctionName": {
+          "Ref": "GetAllUsersLambdaFunctionParameter"
+        },
+        "CodeSha256": "tz4Y8oV6W5yMfoXhj+/03FlGVN22nEFqwZB3XeTdE2Q="
+      },
+      "DependsOn": []
+    },
+    "GetUserLambdaVersionptxLvNG1tsZBInlA4PIuOjDvnKJSsvxurOY8jU7Suk": {
+      "Type": "AWS::Lambda::Version",
+      "DeletionPolicy": "Retain",
+      "Properties": {
+        "FunctionName": {
+          "Ref": "GetUserLambdaFunctionParameter"
+        },
+        "CodeSha256": "tz4Y8oV6W5yMfoXhj+/03FlGVN22nEFqwZB3XeTdE2Q="
+      },
+      "DependsOn": []
+    },
+    "UpdateUserLambdaVersionvLupVyjuDMdwWOR5BhR4vKvLuhcAlYiEJShKyqlEhY": {
+      "Type": "AWS::Lambda::Version",
+      "DeletionPolicy": "Retain",
+      "Properties": {
+        "FunctionName": {
+          "Ref": "UpdateUserLambdaFunctionParameter"
+        },
+        "CodeSha256": "tz4Y8oV6W5yMfoXhj+/03FlGVN22nEFqwZB3XeTdE2Q="
+      },
+      "DependsOn": []
+    },
+    "GetAllNewslettersLambdaVersion48mbWcTg5H8wE4ERTqxByS4seehsjNFFnlso6xB4s": {
+      "Type": "AWS::Lambda::Version",
+      "DeletionPolicy": "Retain",
+      "Properties": {
+        "FunctionName": {
+          "Ref": "GetAllNewslettersLambdaFunctionParameter"
+        },
+        "CodeSha256": "tz4Y8oV6W5yMfoXhj+/03FlGVN22nEFqwZB3XeTdE2Q="
+      },
+      "DependsOn": []
+    },
+    "PostNewsletterLambdaVersionFI4K8xi0jyojArpN27GDtc0CmtKkAhylccoYhewz04": {
+      "Type": "AWS::Lambda::Version",
+      "DeletionPolicy": "Retain",
+      "Properties": {
+        "FunctionName": {
+          "Ref": "PostNewsletterLambdaFunctionParameter"
+        },
+        "CodeSha256": "tz4Y8oV6W5yMfoXhj+/03FlGVN22nEFqwZB3XeTdE2Q="
+      },
+      "DependsOn": []
+    },
+    "DeleteNewsletterLambdaVersioncWeLWim700MyXLhMEZmOrFPstUkkbltRuna88rfWI": {
+      "Type": "AWS::Lambda::Version",
+      "DeletionPolicy": "Retain",
+      "Properties": {
+        "FunctionName": {
+          "Ref": "DeleteNewsletterLambdaFunctionParameter"
+        },
+        "CodeSha256": "tz4Y8oV6W5yMfoXhj+/03FlGVN22nEFqwZB3XeTdE2Q="
+      },
+      "DependsOn": []
+    },
+    "EditNewsletterLambdaVersionmj0lTVVfy7SCHazjLpxHb5ILEqzlZ7AYmusfYwFXxw": {
+      "Type": "AWS::Lambda::Version",
+      "DeletionPolicy": "Retain",
+      "Properties": {
+        "FunctionName": {
+          "Ref": "EditNewsletterLambdaFunctionParameter"
+        },
+        "CodeSha256": "tz4Y8oV6W5yMfoXhj+/03FlGVN22nEFqwZB3XeTdE2Q="
+      },
+      "DependsOn": []
+    },
+    "GetArticleLambdaVersionan6gzw1NVTI2jZDSVoQI5vdalH1zfrUGRUl5CkHDOM": {
+      "Type": "AWS::Lambda::Version",
+      "DeletionPolicy": "Retain",
+      "Properties": {
+        "FunctionName": {
+          "Ref": "GetArticleLambdaFunctionParameter"
+        },
+        "CodeSha256": "tz4Y8oV6W5yMfoXhj+/03FlGVN22nEFqwZB3XeTdE2Q="
+      },
+      "DependsOn": []
+    },
+    "RateNewsletterLambdaVersionEddQXNkxq1T2fVSjBvEG4srdJDODBsUDvI9GSLdmjnU": {
+      "Type": "AWS::Lambda::Version",
+      "DeletionPolicy": "Retain",
+      "Properties": {
+        "FunctionName": {
+          "Ref": "RateNewsletterLambdaFunctionParameter"
+        },
+        "CodeSha256": "tz4Y8oV6W5yMfoXhj+/03FlGVN22nEFqwZB3XeTdE2Q="
+      },
+      "DependsOn": []
+    },
+    "AddSubscriberLambdaVersionznqAhpmUjhm2wM3gXKPTKFhyoxqwXIsnuHhFY2eGM": {
+      "Type": "AWS::Lambda::Version",
+      "DeletionPolicy": "Retain",
+      "Properties": {
+        "FunctionName": {
+          "Ref": "AddSubscriberLambdaFunctionParameter"
+        },
+        "CodeSha256": "tz4Y8oV6W5yMfoXhj+/03FlGVN22nEFqwZB3XeTdE2Q="
+      },
+      "DependsOn": []
+    },
+    "GetAllMembersLambdaVersionopEVjLhxwF2sfc2vJxZhNxpBqGf7KYiDQnC4RSmNA8": {
+      "Type": "AWS::Lambda::Version",
+      "DeletionPolicy": "Retain",
+      "Properties": {
+        "FunctionName": {
+          "Ref": "GetAllMembersLambdaFunctionParameter"
+        },
+        "CodeSha256": "tz4Y8oV6W5yMfoXhj+/03FlGVN22nEFqwZB3XeTdE2Q="
+      },
+      "DependsOn": []
+    },
+    "AddItemLambdaVersionYaPiqYHph2EEg8H9Cft8tlTJV96cKS2fJd9S4DXSe0": {
+      "Type": "AWS::Lambda::Version",
+      "DeletionPolicy": "Retain",
+      "Properties": {
+        "FunctionName": {
+          "Ref": "AddItemLambdaFunctionParameter"
+        },
+        "CodeSha256": "tz4Y8oV6W5yMfoXhj+/03FlGVN22nEFqwZB3XeTdE2Q="
+      },
+      "DependsOn": []
+    },
+    "GetAllItemsLambdaVersion2nqgmYhssaH5ptLJUgpF0KXXF9MnSZYIxkyNonKa9Q": {
+      "Type": "AWS::Lambda::Version",
+      "DeletionPolicy": "Retain",
+      "Properties": {
+        "FunctionName": {
+          "Ref": "GetAllItemsLambdaFunctionParameter"
+        },
+        "CodeSha256": "tz4Y8oV6W5yMfoXhj+/03FlGVN22nEFqwZB3XeTdE2Q="
+      },
+      "DependsOn": []
+    }
+  },
+  "Outputs": {
+    "GetAllItemsLambdaVersion2nqgmYhssaH5ptLJUgpF0KXXF9MnSZYIxkyNonKa9Q": {
+      "Value": {
+        "Ref": "GetAllItemsLambdaVersion2nqgmYhssaH5ptLJUgpF0KXXF9MnSZYIxkyNonKa9Q"
+      }
+    },
+    "AddItemLambdaVersionYaPiqYHph2EEg8H9Cft8tlTJV96cKS2fJd9S4DXSe0": {
+      "Value": {
+        "Ref": "AddItemLambdaVersionYaPiqYHph2EEg8H9Cft8tlTJV96cKS2fJd9S4DXSe0"
+      }
+    },
+    "GetAllMembersLambdaVersionopEVjLhxwF2sfc2vJxZhNxpBqGf7KYiDQnC4RSmNA8": {
+      "Value": {
+        "Ref": "GetAllMembersLambdaVersionopEVjLhxwF2sfc2vJxZhNxpBqGf7KYiDQnC4RSmNA8"
+      }
+    },
+    "AddSubscriberLambdaVersionznqAhpmUjhm2wM3gXKPTKFhyoxqwXIsnuHhFY2eGM": {
+      "Value": {
+        "Ref": "AddSubscriberLambdaVersionznqAhpmUjhm2wM3gXKPTKFhyoxqwXIsnuHhFY2eGM"
+      }
+    },
+    "RateNewsletterLambdaVersionEddQXNkxq1T2fVSjBvEG4srdJDODBsUDvI9GSLdmjnU": {
+      "Value": {
+        "Ref": "RateNewsletterLambdaVersionEddQXNkxq1T2fVSjBvEG4srdJDODBsUDvI9GSLdmjnU"
+      }
+    },
+    "GetArticleLambdaVersionan6gzw1NVTI2jZDSVoQI5vdalH1zfrUGRUl5CkHDOM": {
+      "Value": {
+        "Ref": "GetArticleLambdaVersionan6gzw1NVTI2jZDSVoQI5vdalH1zfrUGRUl5CkHDOM"
+      }
+    },
+    "EditNewsletterLambdaVersionmj0lTVVfy7SCHazjLpxHb5ILEqzlZ7AYmusfYwFXxw": {
+      "Value": {
+        "Ref": "EditNewsletterLambdaVersionmj0lTVVfy7SCHazjLpxHb5ILEqzlZ7AYmusfYwFXxw"
+      }
+    },
+    "DeleteNewsletterLambdaVersioncWeLWim700MyXLhMEZmOrFPstUkkbltRuna88rfWI": {
+      "Value": {
+        "Ref": "DeleteNewsletterLambdaVersioncWeLWim700MyXLhMEZmOrFPstUkkbltRuna88rfWI"
+      }
+    },
+    "PostNewsletterLambdaVersionFI4K8xi0jyojArpN27GDtc0CmtKkAhylccoYhewz04": {
+      "Value": {
+        "Ref": "PostNewsletterLambdaVersionFI4K8xi0jyojArpN27GDtc0CmtKkAhylccoYhewz04"
+      }
+    },
+    "GetAllNewslettersLambdaVersion48mbWcTg5H8wE4ERTqxByS4seehsjNFFnlso6xB4s": {
+      "Value": {
+        "Ref": "GetAllNewslettersLambdaVersion48mbWcTg5H8wE4ERTqxByS4seehsjNFFnlso6xB4s"
+      }
+    },
+    "UpdateUserLambdaVersionvLupVyjuDMdwWOR5BhR4vKvLuhcAlYiEJShKyqlEhY": {
+      "Value": {
+        "Ref": "UpdateUserLambdaVersionvLupVyjuDMdwWOR5BhR4vKvLuhcAlYiEJShKyqlEhY"
+      }
+    },
+    "GetUserLambdaVersionptxLvNG1tsZBInlA4PIuOjDvnKJSsvxurOY8jU7Suk": {
+      "Value": {
+        "Ref": "GetUserLambdaVersionptxLvNG1tsZBInlA4PIuOjDvnKJSsvxurOY8jU7Suk"
+      }
+    },
+    "GetAllUsersLambdaVersionbKttq6fnZQvugpBZGux7vQG9UmPhatlb0yOb73cno": {
+      "Value": {
+        "Ref": "GetAllUsersLambdaVersionbKttq6fnZQvugpBZGux7vQG9UmPhatlb0yOb73cno"
+      }
+    },
+    "AdduserLambdaVersionPb6yJHkdtDFIkfCeu0yYOzSdKaNaqyGBVF7Lfc": {
+      "Value": {
+        "Ref": "AdduserLambdaVersionPb6yJHkdtDFIkfCeu0yYOzSdKaNaqyGBVF7Lfc"
+      }
+    },
+    "GetAllRolesLambdaVersionNtHCBE96f9PUCIeRu8CCxti3dpKQWeVVm3mQzCyNFc": {
+      "Value": {
+        "Ref": "GetAllRolesLambdaVersionNtHCBE96f9PUCIeRu8CCxti3dpKQWeVVm3mQzCyNFc"
+      }
+    },
+    "GetRoleLambdaVersionvxnQaF5C5yh3sVj72E3mlqgVWqDMpjqsRiuVtGb87g": {
+      "Value": {
+        "Ref": "GetRoleLambdaVersionvxnQaF5C5yh3sVj72E3mlqgVWqDMpjqsRiuVtGb87g"
+      }
+    },
+    "DeleteRoleLambdaVersion7pFXgbVTzsDx2bNVWVvURhgG46GwXqIShxhNunnDzc": {
+      "Value": {
+        "Ref": "DeleteRoleLambdaVersion7pFXgbVTzsDx2bNVWVvURhgG46GwXqIShxhNunnDzc"
+      }
+    },
+    "UpdateRoleLambdaVersionEwX6uKs8JnGWLZq1bp8L8M84w1E6ZT3wCOsDb71QAk": {
+      "Value": {
+        "Ref": "UpdateRoleLambdaVersionEwX6uKs8JnGWLZq1bp8L8M84w1E6ZT3wCOsDb71QAk"
+      }
+    },
+    "CreateRoleLambdaVersionhpZyYQgndQECwwalVZJpZBQPyOagsqXyqCW3mOcD61I": {
+      "Value": {
+        "Ref": "CreateRoleLambdaVersionhpZyYQgndQECwwalVZJpZBQPyOagsqXyqCW3mOcD61I"
+      }
+    }
+  }
+}

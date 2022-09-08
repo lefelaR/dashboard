@@ -1,0 +1,3758 @@
+{
+  "AWSTemplateFormatVersion": "2010-09-09",
+  "Description": "The AWS CloudFormation template for this Serverless application",
+  "Resources": {
+    "CreateRoleLogGroup": {
+      "Type": "AWS::Logs::LogGroup",
+      "Properties": {
+        "LogGroupName": "/aws/lambda/mrlyons-stag-createRole"
+      },
+      "DependsOn": []
+    },
+    "UpdateRoleLogGroup": {
+      "Type": "AWS::Logs::LogGroup",
+      "Properties": {
+        "LogGroupName": "/aws/lambda/mrlyons-stag-updateRole"
+      },
+      "DependsOn": []
+    },
+    "DeleteRoleLogGroup": {
+      "Type": "AWS::Logs::LogGroup",
+      "Properties": {
+        "LogGroupName": "/aws/lambda/mrlyons-stag-deleteRole"
+      },
+      "DependsOn": []
+    },
+    "GetRoleLogGroup": {
+      "Type": "AWS::Logs::LogGroup",
+      "Properties": {
+        "LogGroupName": "/aws/lambda/mrlyons-stag-getRole"
+      },
+      "DependsOn": []
+    },
+    "GetAllRolesLogGroup": {
+      "Type": "AWS::Logs::LogGroup",
+      "Properties": {
+        "LogGroupName": "/aws/lambda/mrlyons-stag-getAllRoles"
+      },
+      "DependsOn": []
+    },
+    "AdduserLogGroup": {
+      "Type": "AWS::Logs::LogGroup",
+      "Properties": {
+        "LogGroupName": "/aws/lambda/mrlyons-stag-adduser"
+      },
+      "DependsOn": []
+    },
+    "GetAllUsersLogGroup": {
+      "Type": "AWS::Logs::LogGroup",
+      "Properties": {
+        "LogGroupName": "/aws/lambda/mrlyons-stag-getAllUsers"
+      },
+      "DependsOn": []
+    },
+    "GetUserLogGroup": {
+      "Type": "AWS::Logs::LogGroup",
+      "Properties": {
+        "LogGroupName": "/aws/lambda/mrlyons-stag-getUser"
+      },
+      "DependsOn": []
+    },
+    "UpdateUserLogGroup": {
+      "Type": "AWS::Logs::LogGroup",
+      "Properties": {
+        "LogGroupName": "/aws/lambda/mrlyons-stag-updateUser"
+      },
+      "DependsOn": []
+    },
+    "GetAllNewslettersLogGroup": {
+      "Type": "AWS::Logs::LogGroup",
+      "Properties": {
+        "LogGroupName": "/aws/lambda/mrlyons-stag-getAllNewsletters"
+      },
+      "DependsOn": []
+    },
+    "PostNewsletterLogGroup": {
+      "Type": "AWS::Logs::LogGroup",
+      "Properties": {
+        "LogGroupName": "/aws/lambda/mrlyons-stag-postNewsletter"
+      },
+      "DependsOn": []
+    },
+    "DeleteNewsletterLogGroup": {
+      "Type": "AWS::Logs::LogGroup",
+      "Properties": {
+        "LogGroupName": "/aws/lambda/mrlyons-stag-deleteNewsletter"
+      },
+      "DependsOn": []
+    },
+    "EditNewsletterLogGroup": {
+      "Type": "AWS::Logs::LogGroup",
+      "Properties": {
+        "LogGroupName": "/aws/lambda/mrlyons-stag-editNewsletter"
+      },
+      "DependsOn": []
+    },
+    "GetArticleLogGroup": {
+      "Type": "AWS::Logs::LogGroup",
+      "Properties": {
+        "LogGroupName": "/aws/lambda/mrlyons-stag-getArticle"
+      },
+      "DependsOn": []
+    },
+    "RateNewsletterLogGroup": {
+      "Type": "AWS::Logs::LogGroup",
+      "Properties": {
+        "LogGroupName": "/aws/lambda/mrlyons-stag-rateNewsletter"
+      },
+      "DependsOn": []
+    },
+    "AddSubscriberLogGroup": {
+      "Type": "AWS::Logs::LogGroup",
+      "Properties": {
+        "LogGroupName": "/aws/lambda/mrlyons-stag-addSubscriber"
+      },
+      "DependsOn": []
+    },
+    "GetAllMembersLogGroup": {
+      "Type": "AWS::Logs::LogGroup",
+      "Properties": {
+        "LogGroupName": "/aws/lambda/mrlyons-stag-getAllMembers"
+      },
+      "DependsOn": []
+    },
+    "AddItemLogGroup": {
+      "Type": "AWS::Logs::LogGroup",
+      "Properties": {
+        "LogGroupName": "/aws/lambda/mrlyons-stag-addItem"
+      },
+      "DependsOn": []
+    },
+    "GetAllItemsLogGroup": {
+      "Type": "AWS::Logs::LogGroup",
+      "Properties": {
+        "LogGroupName": "/aws/lambda/mrlyons-stag-getAllItems"
+      },
+      "DependsOn": []
+    },
+    "IamRoleLambdaExecution": {
+      "Type": "AWS::IAM::Role",
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "Service": [
+                  "lambda.amazonaws.com"
+                ]
+              },
+              "Action": [
+                "sts:AssumeRole"
+              ]
+            }
+          ]
+        },
+        "Policies": [
+          {
+            "PolicyName": {
+              "Fn::Join": [
+                "-",
+                [
+                  "mrlyons",
+                  "stag",
+                  "lambda"
+                ]
+              ]
+            },
+            "PolicyDocument": {
+              "Version": "2012-10-17",
+              "Statement": [
+                {
+                  "Effect": "Allow",
+                  "Action": [
+                    "logs:CreateLogStream",
+                    "logs:CreateLogGroup"
+                  ],
+                  "Resource": [
+                    {
+                      "Fn::Sub": [
+                        "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/mrlyons-stag*:*",
+                        {}
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "Effect": "Allow",
+                  "Action": [
+                    "logs:PutLogEvents"
+                  ],
+                  "Resource": [
+                    {
+                      "Fn::Sub": [
+                        "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/mrlyons-stag*:*:*",
+                        {}
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "Effect": "Allow",
+                  "Action": [
+                    "xray:PutTraceSegments",
+                    "xray:PutTelemetryRecords"
+                  ],
+                  "Resource": "*"
+                },
+                {
+                  "Effect": "Allow",
+                  "Action": [
+                    "events:PutEvents"
+                  ],
+                  "Resource": "*"
+                },
+                {
+                  "Effect": "Allow",
+                  "Action": [
+                    "dynamodb:DescribeTable",
+                    "dynamodb:Query",
+                    "dynamodb:Scan",
+                    "dynamodb:GetItem",
+                    "dynamodb:PutItem",
+                    "dynamodb:UpdateItem",
+                    "dynamodb:DeleteItem"
+                  ],
+                  "Resource": "*"
+                },
+                {
+                  "Effect": "Allow",
+                  "Action": [
+                    "s3:*"
+                  ],
+                  "Resource": "*"
+                },
+                {
+                  "Effect": "Allow",
+                  "Action": [
+                    "lambda:InvokeFunction"
+                  ],
+                  "Resource": "*"
+                },
+                {
+                  "Effect": "Allow",
+                  "Action": [
+                    "ses:*"
+                  ],
+                  "Resource": "*"
+                },
+                {
+                  "Sid": "VisualEditor0",
+                  "Effect": "Allow",
+                  "Action": [
+                    "cloudformation:CreateStack",
+                    "cloudformation:DeleteStack",
+                    "cloudformation:DescribeStacks",
+                    "cloudformation:DescribeStackEvents",
+                    "cloudformation:DescribeStackResource",
+                    "cloudformation:DescribeStackResources",
+                    "cloudformation:ListStackResources",
+                    "cloudformation:UpdateStack",
+                    "cloudformation:ValidateTemplate",
+                    "logs:CreateLogGroup",
+                    "logs:DescribeLogGroups",
+                    "logs:DeleteLogGroup"
+                  ],
+                  "Resource": "*"
+                },
+                {
+                  "Effect": "Allow",
+                  "Action": [
+                    "xray:PutTraceSegments",
+                    "xray:PutTelemetryRecords"
+                  ],
+                  "Resource": [
+                    "*"
+                  ]
+                }
+              ]
+            }
+          }
+        ],
+        "Path": "/",
+        "RoleName": {
+          "Fn::Join": [
+            "-",
+            [
+              "mrlyons",
+              "stag",
+              {
+                "Ref": "AWS::Region"
+              },
+              "lambdaRole"
+            ]
+          ]
+        }
+      },
+      "DependsOn": []
+    },
+    "CreateRoleLambdaFunction": {
+      "Type": "AWS::Lambda::Function",
+      "Properties": {
+        "Code": {
+          "S3Bucket": "rakheoana-serverless-deployments",
+          "S3Key": "serverless/mrlyons/stag/1659964259186-2022-08-08T13:10:59.186Z/mrlyons.zip"
+        },
+        "Handler": "src/functions/roles/create/handler.main",
+        "Runtime": "nodejs14.x",
+        "FunctionName": "mrlyons-stag-createRole",
+        "MemorySize": 1024,
+        "Timeout": 6,
+        "TracingConfig": {
+          "Mode": "Active"
+        },
+        "Environment": {
+          "Variables": {
+            "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1",
+            "LOG_TABLE": "mrlyons-stag-logs",
+            "ROLES_TABLE": "mrlyons-stag-roles",
+            "USERS_TABLE": "mrlyons-stag-users",
+            "NEWSLETTERS_TABLE": "mrlyons-stag-newsletter",
+            "REGION": "eu-central-1",
+            "ADMIN_EMAIL": "rakgew@gmail.com",
+            "STAGE": "stag",
+            "MAIL_SUBSCRIBER_TABLE": "mrlyons-stag-mailSubscribers",
+            "ITEMS_TABLE": "mrlyons-stag-items"
+          }
+        },
+        "Role": {
+          "Fn::GetAtt": [
+            "IamRoleLambdaExecution",
+            "Arn"
+          ]
+        }
+      },
+      "DependsOn": [
+        "CreateRoleLogGroup"
+      ]
+    },
+    "UpdateRoleLambdaFunction": {
+      "Type": "AWS::Lambda::Function",
+      "Properties": {
+        "Code": {
+          "S3Bucket": "turati-serverless-deployments",
+          "S3Key": "serverless/mrlyons/stag/1659964259186-2022-08-08T13:10:59.186Z/mrlyons.zip"
+        },
+        "Handler": "src/functions/roles/update/handler.main",
+        "Runtime": "nodejs14.x",
+        "FunctionName": "mrlyons-stag-updateRole",
+        "MemorySize": 1024,
+        "Timeout": 6,
+        "TracingConfig": {
+          "Mode": "Active"
+        },
+        "Environment": {
+          "Variables": {
+            "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1",
+            "LOG_TABLE": "mrlyons-stag-logs",
+            "ROLES_TABLE": "mrlyons-stag-roles",
+            "USERS_TABLE": "mrlyons-stag-users",
+            "NEWSLETTERS_TABLE": "mrlyons-stag-newsletter",
+            "REGION": "eu-central-1",
+            "ADMIN_EMAIL": "rakheoana@turati.co.za",
+            "STAGE": "stag",
+            "MAIL_SUBSCRIBER_TABLE": "mrlyons-stag-mailSubscribers",
+            "ITEMS_TABLE": "mrlyons-stag-items"
+          }
+        },
+        "Role": {
+          "Fn::GetAtt": [
+            "IamRoleLambdaExecution",
+            "Arn"
+          ]
+        }
+      },
+      "DependsOn": [
+        "UpdateRoleLogGroup"
+      ]
+    },
+    "DeleteRoleLambdaFunction": {
+      "Type": "AWS::Lambda::Function",
+      "Properties": {
+        "Code": {
+          "S3Bucket": "turati-serverless-deployments",
+          "S3Key": "serverless/mrlyons/stag/1659964259186-2022-08-08T13:10:59.186Z/mrlyons.zip"
+        },
+        "Handler": "src/functions/roles/delete/handler.main",
+        "Runtime": "nodejs14.x",
+        "FunctionName": "mrlyons-stag-deleteRole",
+        "MemorySize": 1024,
+        "Timeout": 6,
+        "TracingConfig": {
+          "Mode": "Active"
+        },
+        "Environment": {
+          "Variables": {
+            "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1",
+            "LOG_TABLE": "mrlyons-stag-logs",
+            "ROLES_TABLE": "mrlyons-stag-roles",
+            "USERS_TABLE": "mrlyons-stag-users",
+            "NEWSLETTERS_TABLE": "mrlyons-stag-newsletter",
+            "REGION": "eu-central-1",
+            "ADMIN_EMAIL": "rakheoana@turati.co.za",
+            "STAGE": "stag",
+            "MAIL_SUBSCRIBER_TABLE": "mrlyons-stag-mailSubscribers",
+            "ITEMS_TABLE": "mrlyons-stag-items"
+          }
+        },
+        "Role": {
+          "Fn::GetAtt": [
+            "IamRoleLambdaExecution",
+            "Arn"
+          ]
+        }
+      },
+      "DependsOn": [
+        "DeleteRoleLogGroup"
+      ]
+    },
+    "GetRoleLambdaFunction": {
+      "Type": "AWS::Lambda::Function",
+      "Properties": {
+        "Code": {
+          "S3Bucket": "turati-serverless-deployments",
+          "S3Key": "serverless/mrlyons/stag/1659964259186-2022-08-08T13:10:59.186Z/mrlyons.zip"
+        },
+        "Handler": "src/functions/roles/get/handler.main",
+        "Runtime": "nodejs14.x",
+        "FunctionName": "mrlyons-stag-getRole",
+        "MemorySize": 1024,
+        "Timeout": 6,
+        "TracingConfig": {
+          "Mode": "Active"
+        },
+        "Environment": {
+          "Variables": {
+            "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1",
+            "LOG_TABLE": "mrlyons-stag-logs",
+            "ROLES_TABLE": "mrlyons-stag-roles",
+            "USERS_TABLE": "mrlyons-stag-users",
+            "NEWSLETTERS_TABLE": "mrlyons-stag-newsletter",
+            "REGION": "eu-central-1",
+            "ADMIN_EMAIL": "rakheoana@turati.co.za",
+            "STAGE": "stag",
+            "MAIL_SUBSCRIBER_TABLE": "mrlyons-stag-mailSubscribers",
+            "ITEMS_TABLE": "mrlyons-stag-items"
+          }
+        },
+        "Role": {
+          "Fn::GetAtt": [
+            "IamRoleLambdaExecution",
+            "Arn"
+          ]
+        }
+      },
+      "DependsOn": [
+        "GetRoleLogGroup"
+      ]
+    },
+    "GetAllRolesLambdaFunction": {
+      "Type": "AWS::Lambda::Function",
+      "Properties": {
+        "Code": {
+          "S3Bucket": "turati-serverless-deployments",
+          "S3Key": "serverless/mrlyons/stag/1659964259186-2022-08-08T13:10:59.186Z/mrlyons.zip"
+        },
+        "Handler": "src/functions/roles/getAll/handler.main",
+        "Runtime": "nodejs14.x",
+        "FunctionName": "mrlyons-stag-getAllRoles",
+        "MemorySize": 1024,
+        "Timeout": 6,
+        "TracingConfig": {
+          "Mode": "Active"
+        },
+        "Environment": {
+          "Variables": {
+            "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1",
+            "LOG_TABLE": "mrlyons-stag-logs",
+            "ROLES_TABLE": "mrlyons-stag-roles",
+            "USERS_TABLE": "mrlyons-stag-users",
+            "NEWSLETTERS_TABLE": "mrlyons-stag-newsletter",
+            "REGION": "eu-central-1",
+            "ADMIN_EMAIL": "rakheoana@turati.co.za",
+            "STAGE": "stag",
+            "MAIL_SUBSCRIBER_TABLE": "mrlyons-stag-mailSubscribers",
+            "ITEMS_TABLE": "mrlyons-stag-items"
+          }
+        },
+        "Role": {
+          "Fn::GetAtt": [
+            "IamRoleLambdaExecution",
+            "Arn"
+          ]
+        }
+      },
+      "DependsOn": [
+        "GetAllRolesLogGroup"
+      ]
+    },
+    "AdduserLambdaFunction": {
+      "Type": "AWS::Lambda::Function",
+      "Properties": {
+        "Code": {
+          "S3Bucket": "turati-serverless-deployments",
+          "S3Key": "serverless/mrlyons/stag/1659964259186-2022-08-08T13:10:59.186Z/mrlyons.zip"
+        },
+        "Handler": "src/functions/users/addUser/handler.main",
+        "Runtime": "nodejs14.x",
+        "FunctionName": "mrlyons-stag-adduser",
+        "MemorySize": 1024,
+        "Timeout": 6,
+        "TracingConfig": {
+          "Mode": "Active"
+        },
+        "Environment": {
+          "Variables": {
+            "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1",
+            "LOG_TABLE": "mrlyons-stag-logs",
+            "ROLES_TABLE": "mrlyons-stag-roles",
+            "USERS_TABLE": "mrlyons-stag-users",
+            "NEWSLETTERS_TABLE": "mrlyons-stag-newsletter",
+            "REGION": "eu-central-1",
+            "ADMIN_EMAIL": "rakheoana@turati.co.za",
+            "STAGE": "stag",
+            "MAIL_SUBSCRIBER_TABLE": "mrlyons-stag-mailSubscribers",
+            "ITEMS_TABLE": "mrlyons-stag-items"
+          }
+        },
+        "Role": {
+          "Fn::GetAtt": [
+            "IamRoleLambdaExecution",
+            "Arn"
+          ]
+        }
+      },
+      "DependsOn": [
+        "AdduserLogGroup"
+      ]
+    },
+    "GetAllUsersLambdaFunction": {
+      "Type": "AWS::Lambda::Function",
+      "Properties": {
+        "Code": {
+          "S3Bucket": "turati-serverless-deployments",
+          "S3Key": "serverless/mrlyons/stag/1659964259186-2022-08-08T13:10:59.186Z/mrlyons.zip"
+        },
+        "Handler": "src/functions/users/getAllUsers/handler.main",
+        "Runtime": "nodejs14.x",
+        "FunctionName": "mrlyons-stag-getAllUsers",
+        "MemorySize": 1024,
+        "Timeout": 6,
+        "TracingConfig": {
+          "Mode": "Active"
+        },
+        "Environment": {
+          "Variables": {
+            "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1",
+            "LOG_TABLE": "mrlyons-stag-logs",
+            "ROLES_TABLE": "mrlyons-stag-roles",
+            "USERS_TABLE": "mrlyons-stag-users",
+            "NEWSLETTERS_TABLE": "mrlyons-stag-newsletter",
+            "REGION": "eu-central-1",
+            "ADMIN_EMAIL": "rakheoana@turati.co.za",
+            "STAGE": "stag",
+            "MAIL_SUBSCRIBER_TABLE": "mrlyons-stag-mailSubscribers",
+            "ITEMS_TABLE": "mrlyons-stag-items"
+          }
+        },
+        "Role": {
+          "Fn::GetAtt": [
+            "IamRoleLambdaExecution",
+            "Arn"
+          ]
+        }
+      },
+      "DependsOn": [
+        "GetAllUsersLogGroup"
+      ]
+    },
+    "GetUserLambdaFunction": {
+      "Type": "AWS::Lambda::Function",
+      "Properties": {
+        "Code": {
+          "S3Bucket": "turati-serverless-deployments",
+          "S3Key": "serverless/mrlyons/stag/1659964259186-2022-08-08T13:10:59.186Z/mrlyons.zip"
+        },
+        "Handler": "src/functions/users/getUser/handler.main",
+        "Runtime": "nodejs14.x",
+        "FunctionName": "mrlyons-stag-getUser",
+        "MemorySize": 1024,
+        "Timeout": 6,
+        "TracingConfig": {
+          "Mode": "Active"
+        },
+        "Environment": {
+          "Variables": {
+            "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1",
+            "LOG_TABLE": "mrlyons-stag-logs",
+            "ROLES_TABLE": "mrlyons-stag-roles",
+            "USERS_TABLE": "mrlyons-stag-users",
+            "NEWSLETTERS_TABLE": "mrlyons-stag-newsletter",
+            "REGION": "eu-central-1",
+            "ADMIN_EMAIL": "rakheoana@turati.co.za",
+            "STAGE": "stag",
+            "MAIL_SUBSCRIBER_TABLE": "mrlyons-stag-mailSubscribers",
+            "ITEMS_TABLE": "mrlyons-stag-items"
+          }
+        },
+        "Role": {
+          "Fn::GetAtt": [
+            "IamRoleLambdaExecution",
+            "Arn"
+          ]
+        }
+      },
+      "DependsOn": [
+        "GetUserLogGroup"
+      ]
+    },
+    "UpdateUserLambdaFunction": {
+      "Type": "AWS::Lambda::Function",
+      "Properties": {
+        "Code": {
+          "S3Bucket": "turati-serverless-deployments",
+          "S3Key": "serverless/mrlyons/stag/1659964259186-2022-08-08T13:10:59.186Z/mrlyons.zip"
+        },
+        "Handler": "src/functions/users/updateUser/handler.main",
+        "Runtime": "nodejs14.x",
+        "FunctionName": "mrlyons-stag-updateUser",
+        "MemorySize": 1024,
+        "Timeout": 6,
+        "TracingConfig": {
+          "Mode": "Active"
+        },
+        "Environment": {
+          "Variables": {
+            "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1",
+            "LOG_TABLE": "mrlyons-stag-logs",
+            "ROLES_TABLE": "mrlyons-stag-roles",
+            "USERS_TABLE": "mrlyons-stag-users",
+            "NEWSLETTERS_TABLE": "mrlyons-stag-newsletter",
+            "REGION": "eu-central-1",
+            "ADMIN_EMAIL": "rakheoana@turati.co.za",
+            "STAGE": "stag",
+            "MAIL_SUBSCRIBER_TABLE": "mrlyons-stag-mailSubscribers",
+            "ITEMS_TABLE": "mrlyons-stag-items"
+          }
+        },
+        "Role": {
+          "Fn::GetAtt": [
+            "IamRoleLambdaExecution",
+            "Arn"
+          ]
+        }
+      },
+      "DependsOn": [
+        "UpdateUserLogGroup"
+      ]
+    },
+    "GetAllNewslettersLambdaFunction": {
+      "Type": "AWS::Lambda::Function",
+      "Properties": {
+        "Code": {
+          "S3Bucket": "turati-serverless-deployments",
+          "S3Key": "serverless/mrlyons/stag/1659964259186-2022-08-08T13:10:59.186Z/mrlyons.zip"
+        },
+        "Handler": "src/functions/newsletter/getAll/handler.main",
+        "Runtime": "nodejs14.x",
+        "FunctionName": "mrlyons-stag-getAllNewsletters",
+        "MemorySize": 1024,
+        "Timeout": 6,
+        "TracingConfig": {
+          "Mode": "Active"
+        },
+        "Environment": {
+          "Variables": {
+            "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1",
+            "LOG_TABLE": "mrlyons-stag-logs",
+            "ROLES_TABLE": "mrlyons-stag-roles",
+            "USERS_TABLE": "mrlyons-stag-users",
+            "NEWSLETTERS_TABLE": "mrlyons-stag-newsletter",
+            "REGION": "eu-central-1",
+            "ADMIN_EMAIL": "rakheoana@turati.co.za",
+            "STAGE": "stag",
+            "MAIL_SUBSCRIBER_TABLE": "mrlyons-stag-mailSubscribers",
+            "ITEMS_TABLE": "mrlyons-stag-items"
+          }
+        },
+        "Role": {
+          "Fn::GetAtt": [
+            "IamRoleLambdaExecution",
+            "Arn"
+          ]
+        }
+      },
+      "DependsOn": [
+        "GetAllNewslettersLogGroup"
+      ]
+    },
+    "PostNewsletterLambdaFunction": {
+      "Type": "AWS::Lambda::Function",
+      "Properties": {
+        "Code": {
+          "S3Bucket": "turati-serverless-deployments",
+          "S3Key": "serverless/mrlyons/stag/1659964259186-2022-08-08T13:10:59.186Z/mrlyons.zip"
+        },
+        "Handler": "src/functions/newsletter/create/handler.main",
+        "Runtime": "nodejs14.x",
+        "FunctionName": "mrlyons-stag-postNewsletter",
+        "MemorySize": 1024,
+        "Timeout": 6,
+        "TracingConfig": {
+          "Mode": "Active"
+        },
+        "Environment": {
+          "Variables": {
+            "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1",
+            "LOG_TABLE": "mrlyons-stag-logs",
+            "ROLES_TABLE": "mrlyons-stag-roles",
+            "USERS_TABLE": "mrlyons-stag-users",
+            "NEWSLETTERS_TABLE": "mrlyons-stag-newsletter",
+            "REGION": "eu-central-1",
+            "ADMIN_EMAIL": "rakheoana@turati.co.za",
+            "STAGE": "stag",
+            "MAIL_SUBSCRIBER_TABLE": "mrlyons-stag-mailSubscribers",
+            "ITEMS_TABLE": "mrlyons-stag-items"
+          }
+        },
+        "Role": {
+          "Fn::GetAtt": [
+            "IamRoleLambdaExecution",
+            "Arn"
+          ]
+        }
+      },
+      "DependsOn": [
+        "PostNewsletterLogGroup"
+      ]
+    },
+    "DeleteNewsletterLambdaFunction": {
+      "Type": "AWS::Lambda::Function",
+      "Properties": {
+        "Code": {
+          "S3Bucket": "turati-serverless-deployments",
+          "S3Key": "serverless/mrlyons/stag/1659964259186-2022-08-08T13:10:59.186Z/mrlyons.zip"
+        },
+        "Handler": "src/functions/newsletter/delete/handler.main",
+        "Runtime": "nodejs14.x",
+        "FunctionName": "mrlyons-stag-deleteNewsletter",
+        "MemorySize": 1024,
+        "Timeout": 6,
+        "TracingConfig": {
+          "Mode": "Active"
+        },
+        "Environment": {
+          "Variables": {
+            "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1",
+            "LOG_TABLE": "mrlyons-stag-logs",
+            "ROLES_TABLE": "mrlyons-stag-roles",
+            "USERS_TABLE": "mrlyons-stag-users",
+            "NEWSLETTERS_TABLE": "mrlyons-stag-newsletter",
+            "REGION": "eu-central-1",
+            "ADMIN_EMAIL": "rakheoana@turati.co.za",
+            "STAGE": "stag",
+            "MAIL_SUBSCRIBER_TABLE": "mrlyons-stag-mailSubscribers",
+            "ITEMS_TABLE": "mrlyons-stag-items"
+          }
+        },
+        "Role": {
+          "Fn::GetAtt": [
+            "IamRoleLambdaExecution",
+            "Arn"
+          ]
+        }
+      },
+      "DependsOn": [
+        "DeleteNewsletterLogGroup"
+      ]
+    },
+    "EditNewsletterLambdaFunction": {
+      "Type": "AWS::Lambda::Function",
+      "Properties": {
+        "Code": {
+          "S3Bucket": "turati-serverless-deployments",
+          "S3Key": "serverless/mrlyons/stag/1659964259186-2022-08-08T13:10:59.186Z/mrlyons.zip"
+        },
+        "Handler": "src/functions/newsletter/edit/handler.main",
+        "Runtime": "nodejs14.x",
+        "FunctionName": "mrlyons-stag-editNewsletter",
+        "MemorySize": 1024,
+        "Timeout": 6,
+        "TracingConfig": {
+          "Mode": "Active"
+        },
+        "Environment": {
+          "Variables": {
+            "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1",
+            "LOG_TABLE": "mrlyons-stag-logs",
+            "ROLES_TABLE": "mrlyons-stag-roles",
+            "USERS_TABLE": "mrlyons-stag-users",
+            "NEWSLETTERS_TABLE": "mrlyons-stag-newsletter",
+            "REGION": "eu-central-1",
+            "ADMIN_EMAIL": "rakheoana@turati.co.za",
+            "STAGE": "stag",
+            "MAIL_SUBSCRIBER_TABLE": "mrlyons-stag-mailSubscribers",
+            "ITEMS_TABLE": "mrlyons-stag-items"
+          }
+        },
+        "Role": {
+          "Fn::GetAtt": [
+            "IamRoleLambdaExecution",
+            "Arn"
+          ]
+        }
+      },
+      "DependsOn": [
+        "EditNewsletterLogGroup"
+      ]
+    },
+    "GetArticleLambdaFunction": {
+      "Type": "AWS::Lambda::Function",
+      "Properties": {
+        "Code": {
+          "S3Bucket": "turati-serverless-deployments",
+          "S3Key": "serverless/mrlyons/stag/1659964259186-2022-08-08T13:10:59.186Z/mrlyons.zip"
+        },
+        "Handler": "src/functions/newsletter/getArticle/handler.main",
+        "Runtime": "nodejs14.x",
+        "FunctionName": "mrlyons-stag-getArticle",
+        "MemorySize": 1024,
+        "Timeout": 6,
+        "TracingConfig": {
+          "Mode": "Active"
+        },
+        "Environment": {
+          "Variables": {
+            "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1",
+            "LOG_TABLE": "mrlyons-stag-logs",
+            "ROLES_TABLE": "mrlyons-stag-roles",
+            "USERS_TABLE": "mrlyons-stag-users",
+            "NEWSLETTERS_TABLE": "mrlyons-stag-newsletter",
+            "REGION": "eu-central-1",
+            "ADMIN_EMAIL": "rakheoana@turati.co.za",
+            "STAGE": "stag",
+            "MAIL_SUBSCRIBER_TABLE": "mrlyons-stag-mailSubscribers",
+            "ITEMS_TABLE": "mrlyons-stag-items"
+          }
+        },
+        "Role": {
+          "Fn::GetAtt": [
+            "IamRoleLambdaExecution",
+            "Arn"
+          ]
+        }
+      },
+      "DependsOn": [
+        "GetArticleLogGroup"
+      ]
+    },
+    "RateNewsletterLambdaFunction": {
+      "Type": "AWS::Lambda::Function",
+      "Properties": {
+        "Code": {
+          "S3Bucket": "turati-serverless-deployments",
+          "S3Key": "serverless/mrlyons/stag/1659964259186-2022-08-08T13:10:59.186Z/mrlyons.zip"
+        },
+        "Handler": "src/functions/newsletter/rateArticle/handler.main",
+        "Runtime": "nodejs14.x",
+        "FunctionName": "mrlyons-stag-rateNewsletter",
+        "MemorySize": 1024,
+        "Timeout": 6,
+        "TracingConfig": {
+          "Mode": "Active"
+        },
+        "Environment": {
+          "Variables": {
+            "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1",
+            "LOG_TABLE": "mrlyons-stag-logs",
+            "ROLES_TABLE": "mrlyons-stag-roles",
+            "USERS_TABLE": "mrlyons-stag-users",
+            "NEWSLETTERS_TABLE": "mrlyons-stag-newsletter",
+            "REGION": "eu-central-1",
+            "ADMIN_EMAIL": "rakheoana@turati.co.za",
+            "STAGE": "stag",
+            "MAIL_SUBSCRIBER_TABLE": "mrlyons-stag-mailSubscribers",
+            "ITEMS_TABLE": "mrlyons-stag-items"
+          }
+        },
+        "Role": {
+          "Fn::GetAtt": [
+            "IamRoleLambdaExecution",
+            "Arn"
+          ]
+        }
+      },
+      "DependsOn": [
+        "RateNewsletterLogGroup"
+      ]
+    },
+    "AddSubscriberLambdaFunction": {
+      "Type": "AWS::Lambda::Function",
+      "Properties": {
+        "Code": {
+          "S3Bucket": "turati-serverless-deployments",
+          "S3Key": "serverless/mrlyons/stag/1659964259186-2022-08-08T13:10:59.186Z/mrlyons.zip"
+        },
+        "Handler": "src/functions/mail-subscribers/add/handler.main",
+        "Runtime": "nodejs14.x",
+        "FunctionName": "mrlyons-stag-addSubscriber",
+        "MemorySize": 1024,
+        "Timeout": 6,
+        "TracingConfig": {
+          "Mode": "Active"
+        },
+        "Environment": {
+          "Variables": {
+            "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1",
+            "LOG_TABLE": "mrlyons-stag-logs",
+            "ROLES_TABLE": "mrlyons-stag-roles",
+            "USERS_TABLE": "mrlyons-stag-users",
+            "NEWSLETTERS_TABLE": "mrlyons-stag-newsletter",
+            "REGION": "eu-central-1",
+            "ADMIN_EMAIL": "rakheoana@turati.co.za",
+            "STAGE": "stag",
+            "MAIL_SUBSCRIBER_TABLE": "mrlyons-stag-mailSubscribers",
+            "ITEMS_TABLE": "mrlyons-stag-items"
+          }
+        },
+        "Role": {
+          "Fn::GetAtt": [
+            "IamRoleLambdaExecution",
+            "Arn"
+          ]
+        }
+      },
+      "DependsOn": [
+        "AddSubscriberLogGroup"
+      ]
+    },
+    "GetAllMembersLambdaFunction": {
+      "Type": "AWS::Lambda::Function",
+      "Properties": {
+        "Code": {
+          "S3Bucket": "turati-serverless-deployments",
+          "S3Key": "serverless/mrlyons/stag/1659964259186-2022-08-08T13:10:59.186Z/mrlyons.zip"
+        },
+        "Handler": "src/functions/mail-subscribers/getAll/handler.main",
+        "Runtime": "nodejs14.x",
+        "FunctionName": "mrlyons-stag-getAllMembers",
+        "MemorySize": 1024,
+        "Timeout": 15,
+        "TracingConfig": {
+          "Mode": "Active"
+        },
+        "Environment": {
+          "Variables": {
+            "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1",
+            "LOG_TABLE": "mrlyons-stag-logs",
+            "ROLES_TABLE": "mrlyons-stag-roles",
+            "USERS_TABLE": "mrlyons-stag-users",
+            "NEWSLETTERS_TABLE": "mrlyons-stag-newsletter",
+            "REGION": "eu-central-1",
+            "ADMIN_EMAIL": "rakheoana@turati.co.za",
+            "STAGE": "stag",
+            "MAIL_SUBSCRIBER_TABLE": "mrlyons-stag-mailSubscribers",
+            "ITEMS_TABLE": "mrlyons-stag-items"
+          }
+        },
+        "Role": {
+          "Fn::GetAtt": [
+            "IamRoleLambdaExecution",
+            "Arn"
+          ]
+        }
+      },
+      "DependsOn": [
+        "GetAllMembersLogGroup"
+      ]
+    },
+    "AddItemLambdaFunction": {
+      "Type": "AWS::Lambda::Function",
+      "Properties": {
+        "Code": {
+          "S3Bucket": "turati-serverless-deployments",
+          "S3Key": "serverless/mrlyons/stag/1659964259186-2022-08-08T13:10:59.186Z/mrlyons.zip"
+        },
+        "Handler": "src/functions/items/add/handler.main",
+        "Runtime": "nodejs14.x",
+        "FunctionName": "mrlyons-stag-addItem",
+        "MemorySize": 1024,
+        "Timeout": 6,
+        "TracingConfig": {
+          "Mode": "Active"
+        },
+        "Environment": {
+          "Variables": {
+            "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1",
+            "LOG_TABLE": "mrlyons-stag-logs",
+            "ROLES_TABLE": "mrlyons-stag-roles",
+            "USERS_TABLE": "mrlyons-stag-users",
+            "NEWSLETTERS_TABLE": "mrlyons-stag-newsletter",
+            "REGION": "eu-central-1",
+            "ADMIN_EMAIL": "rakheoana@turati.co.za",
+            "STAGE": "stag",
+            "MAIL_SUBSCRIBER_TABLE": "mrlyons-stag-mailSubscribers",
+            "ITEMS_TABLE": "mrlyons-stag-items"
+          }
+        },
+        "Role": {
+          "Fn::GetAtt": [
+            "IamRoleLambdaExecution",
+            "Arn"
+          ]
+        }
+      },
+      "DependsOn": [
+        "AddItemLogGroup"
+      ]
+    },
+    "GetAllItemsLambdaFunction": {
+      "Type": "AWS::Lambda::Function",
+      "Properties": {
+        "Code": {
+          "S3Bucket": "turati-serverless-deployments",
+          "S3Key": "serverless/mrlyons/stag/1659964259186-2022-08-08T13:10:59.186Z/mrlyons.zip"
+        },
+        "Handler": "src/functions/items/getAll/handler.main",
+        "Runtime": "nodejs14.x",
+        "FunctionName": "mrlyons-stag-getAllItems",
+        "MemorySize": 1024,
+        "Timeout": 15,
+        "TracingConfig": {
+          "Mode": "Active"
+        },
+        "Environment": {
+          "Variables": {
+            "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1",
+            "LOG_TABLE": "mrlyons-stag-logs",
+            "ROLES_TABLE": "mrlyons-stag-roles",
+            "USERS_TABLE": "mrlyons-stag-users",
+            "NEWSLETTERS_TABLE": "mrlyons-stag-newsletter",
+            "REGION": "eu-central-1",
+            "ADMIN_EMAIL": "rakheoana@turati.co.za",
+            "STAGE": "stag",
+            "MAIL_SUBSCRIBER_TABLE": "mrlyons-stag-mailSubscribers",
+            "ITEMS_TABLE": "mrlyons-stag-items"
+          }
+        },
+        "Role": {
+          "Fn::GetAtt": [
+            "IamRoleLambdaExecution",
+            "Arn"
+          ]
+        }
+      },
+      "DependsOn": [
+        "GetAllItemsLogGroup"
+      ]
+    },
+    "ApiGatewayMethodRolesOptions": {
+      "Type": "AWS::ApiGateway::Method",
+      "Properties": {
+        "AuthorizationType": "NONE",
+        "HttpMethod": "OPTIONS",
+        "MethodResponses": [
+          {
+            "StatusCode": "200",
+            "ResponseParameters": {
+              "method.response.header.Access-Control-Allow-Origin": true,
+              "method.response.header.Access-Control-Allow-Headers": true,
+              "method.response.header.Access-Control-Allow-Methods": true
+            },
+            "ResponseModels": {}
+          }
+        ],
+        "RequestParameters": {},
+        "Integration": {
+          "Type": "MOCK",
+          "RequestTemplates": {
+            "application/json": "{statusCode:200}"
+          },
+          "ContentHandling": "CONVERT_TO_TEXT",
+          "IntegrationResponses": [
+            {
+              "StatusCode": "200",
+              "ResponseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'",
+                "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent'",
+                "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,GET,POST'"
+              },
+              "ResponseTemplates": {
+                "application/json": ""
+              }
+            }
+          ]
+        },
+        "ResourceId": {
+          "Fn::GetAtt": [
+            "APINestedStack",
+            "Outputs.ApiGatewayResourceRoles"
+          ]
+        },
+        "RestApiId": {
+          "Fn::GetAtt": [
+            "APINestedStack",
+            "Outputs.ApiGatewayRestApi"
+          ]
+        }
+      },
+      "DependsOn": [
+        "APINestedStack"
+      ]
+    },
+    "ApiGatewayMethodRolesIdVarOptions": {
+      "Type": "AWS::ApiGateway::Method",
+      "Properties": {
+        "AuthorizationType": "NONE",
+        "HttpMethod": "OPTIONS",
+        "MethodResponses": [
+          {
+            "StatusCode": "200",
+            "ResponseParameters": {
+              "method.response.header.Access-Control-Allow-Origin": true,
+              "method.response.header.Access-Control-Allow-Headers": true,
+              "method.response.header.Access-Control-Allow-Methods": true
+            },
+            "ResponseModels": {}
+          }
+        ],
+        "RequestParameters": {},
+        "Integration": {
+          "Type": "MOCK",
+          "RequestTemplates": {
+            "application/json": "{statusCode:200}"
+          },
+          "ContentHandling": "CONVERT_TO_TEXT",
+          "IntegrationResponses": [
+            {
+              "StatusCode": "200",
+              "ResponseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'",
+                "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent'",
+                "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,GET,DELETE,PUT'"
+              },
+              "ResponseTemplates": {
+                "application/json": ""
+              }
+            }
+          ]
+        },
+        "ResourceId": {
+          "Fn::GetAtt": [
+            "APINestedStack",
+            "Outputs.ApiGatewayResourceRolesIdVar"
+          ]
+        },
+        "RestApiId": {
+          "Fn::GetAtt": [
+            "APINestedStack",
+            "Outputs.ApiGatewayRestApi"
+          ]
+        }
+      },
+      "DependsOn": [
+        "APINestedStack"
+      ]
+    },
+    "ApiGatewayMethodUsersOptions": {
+      "Type": "AWS::ApiGateway::Method",
+      "Properties": {
+        "AuthorizationType": "NONE",
+        "HttpMethod": "OPTIONS",
+        "MethodResponses": [
+          {
+            "StatusCode": "200",
+            "ResponseParameters": {
+              "method.response.header.Access-Control-Allow-Origin": true,
+              "method.response.header.Access-Control-Allow-Headers": true,
+              "method.response.header.Access-Control-Allow-Methods": true
+            },
+            "ResponseModels": {}
+          }
+        ],
+        "RequestParameters": {},
+        "Integration": {
+          "Type": "MOCK",
+          "RequestTemplates": {
+            "application/json": "{statusCode:200}"
+          },
+          "ContentHandling": "CONVERT_TO_TEXT",
+          "IntegrationResponses": [
+            {
+              "StatusCode": "200",
+              "ResponseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'",
+                "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent'",
+                "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,GET,POST'"
+              },
+              "ResponseTemplates": {
+                "application/json": ""
+              }
+            }
+          ]
+        },
+        "ResourceId": {
+          "Fn::GetAtt": [
+            "APINestedStack",
+            "Outputs.ApiGatewayResourceUsers"
+          ]
+        },
+        "RestApiId": {
+          "Fn::GetAtt": [
+            "APINestedStack",
+            "Outputs.ApiGatewayRestApi"
+          ]
+        }
+      },
+      "DependsOn": [
+        "APINestedStack"
+      ]
+    },
+    "ApiGatewayMethodUsersIdVarOptions": {
+      "Type": "AWS::ApiGateway::Method",
+      "Properties": {
+        "AuthorizationType": "NONE",
+        "HttpMethod": "OPTIONS",
+        "MethodResponses": [
+          {
+            "StatusCode": "200",
+            "ResponseParameters": {
+              "method.response.header.Access-Control-Allow-Origin": true,
+              "method.response.header.Access-Control-Allow-Headers": true,
+              "method.response.header.Access-Control-Allow-Methods": true
+            },
+            "ResponseModels": {}
+          }
+        ],
+        "RequestParameters": {},
+        "Integration": {
+          "Type": "MOCK",
+          "RequestTemplates": {
+            "application/json": "{statusCode:200}"
+          },
+          "ContentHandling": "CONVERT_TO_TEXT",
+          "IntegrationResponses": [
+            {
+              "StatusCode": "200",
+              "ResponseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'",
+                "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent'",
+                "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,PUT,GET'"
+              },
+              "ResponseTemplates": {
+                "application/json": ""
+              }
+            }
+          ]
+        },
+        "ResourceId": {
+          "Fn::GetAtt": [
+            "APINestedStack",
+            "Outputs.ApiGatewayResourceUsersIdVar"
+          ]
+        },
+        "RestApiId": {
+          "Fn::GetAtt": [
+            "APINestedStack",
+            "Outputs.ApiGatewayRestApi"
+          ]
+        }
+      },
+      "DependsOn": [
+        "APINestedStack"
+      ]
+    },
+    "ApiGatewayMethodNewslettersOptions": {
+      "Type": "AWS::ApiGateway::Method",
+      "Properties": {
+        "AuthorizationType": "NONE",
+        "HttpMethod": "OPTIONS",
+        "MethodResponses": [
+          {
+            "StatusCode": "200",
+            "ResponseParameters": {
+              "method.response.header.Access-Control-Allow-Origin": true,
+              "method.response.header.Access-Control-Allow-Headers": true,
+              "method.response.header.Access-Control-Allow-Methods": true
+            },
+            "ResponseModels": {}
+          }
+        ],
+        "RequestParameters": {},
+        "Integration": {
+          "Type": "MOCK",
+          "RequestTemplates": {
+            "application/json": "{statusCode:200}"
+          },
+          "ContentHandling": "CONVERT_TO_TEXT",
+          "IntegrationResponses": [
+            {
+              "StatusCode": "200",
+              "ResponseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'",
+                "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent'",
+                "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,POST,GET'"
+              },
+              "ResponseTemplates": {
+                "application/json": ""
+              }
+            }
+          ]
+        },
+        "ResourceId": {
+          "Fn::GetAtt": [
+            "APINestedStack",
+            "Outputs.ApiGatewayResourceNewsletters"
+          ]
+        },
+        "RestApiId": {
+          "Fn::GetAtt": [
+            "APINestedStack",
+            "Outputs.ApiGatewayRestApi"
+          ]
+        }
+      },
+      "DependsOn": [
+        "APINestedStack"
+      ]
+    },
+    "ApiGatewayMethodNewslettersIdVarOptions": {
+      "Type": "AWS::ApiGateway::Method",
+      "Properties": {
+        "AuthorizationType": "NONE",
+        "HttpMethod": "OPTIONS",
+        "MethodResponses": [
+          {
+            "StatusCode": "200",
+            "ResponseParameters": {
+              "method.response.header.Access-Control-Allow-Origin": true,
+              "method.response.header.Access-Control-Allow-Headers": true,
+              "method.response.header.Access-Control-Allow-Methods": true
+            },
+            "ResponseModels": {}
+          }
+        ],
+        "RequestParameters": {},
+        "Integration": {
+          "Type": "MOCK",
+          "RequestTemplates": {
+            "application/json": "{statusCode:200}"
+          },
+          "ContentHandling": "CONVERT_TO_TEXT",
+          "IntegrationResponses": [
+            {
+              "StatusCode": "200",
+              "ResponseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'",
+                "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent'",
+                "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,GET,PUT,DELETE'"
+              },
+              "ResponseTemplates": {
+                "application/json": ""
+              }
+            }
+          ]
+        },
+        "ResourceId": {
+          "Fn::GetAtt": [
+            "APINestedStack",
+            "Outputs.ApiGatewayResourceNewslettersIdVar"
+          ]
+        },
+        "RestApiId": {
+          "Fn::GetAtt": [
+            "APINestedStack",
+            "Outputs.ApiGatewayRestApi"
+          ]
+        }
+      },
+      "DependsOn": [
+        "APINestedStack"
+      ]
+    },
+    "ApiGatewayMethodRatenewsletterOptions": {
+      "Type": "AWS::ApiGateway::Method",
+      "Properties": {
+        "AuthorizationType": "NONE",
+        "HttpMethod": "OPTIONS",
+        "MethodResponses": [
+          {
+            "StatusCode": "200",
+            "ResponseParameters": {
+              "method.response.header.Access-Control-Allow-Origin": true,
+              "method.response.header.Access-Control-Allow-Headers": true,
+              "method.response.header.Access-Control-Allow-Methods": true
+            },
+            "ResponseModels": {}
+          }
+        ],
+        "RequestParameters": {},
+        "Integration": {
+          "Type": "MOCK",
+          "RequestTemplates": {
+            "application/json": "{statusCode:200}"
+          },
+          "ContentHandling": "CONVERT_TO_TEXT",
+          "IntegrationResponses": [
+            {
+              "StatusCode": "200",
+              "ResponseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'",
+                "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent'",
+                "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,POST'"
+              },
+              "ResponseTemplates": {
+                "application/json": ""
+              }
+            }
+          ]
+        },
+        "ResourceId": {
+          "Fn::GetAtt": [
+            "APINestedStack",
+            "Outputs.ApiGatewayResourceRatenewsletter"
+          ]
+        },
+        "RestApiId": {
+          "Fn::GetAtt": [
+            "APINestedStack",
+            "Outputs.ApiGatewayRestApi"
+          ]
+        }
+      },
+      "DependsOn": [
+        "APINestedStack"
+      ]
+    },
+    "ApiGatewayMethodMailDashsubscribersOptions": {
+      "Type": "AWS::ApiGateway::Method",
+      "Properties": {
+        "AuthorizationType": "NONE",
+        "HttpMethod": "OPTIONS",
+        "MethodResponses": [
+          {
+            "StatusCode": "200",
+            "ResponseParameters": {
+              "method.response.header.Access-Control-Allow-Origin": true,
+              "method.response.header.Access-Control-Allow-Headers": true,
+              "method.response.header.Access-Control-Allow-Methods": true
+            },
+            "ResponseModels": {}
+          }
+        ],
+        "RequestParameters": {},
+        "Integration": {
+          "Type": "MOCK",
+          "RequestTemplates": {
+            "application/json": "{statusCode:200}"
+          },
+          "ContentHandling": "CONVERT_TO_TEXT",
+          "IntegrationResponses": [
+            {
+              "StatusCode": "200",
+              "ResponseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'",
+                "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent'",
+                "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,GET,POST'"
+              },
+              "ResponseTemplates": {
+                "application/json": ""
+              }
+            }
+          ]
+        },
+        "ResourceId": {
+          "Fn::GetAtt": [
+            "APINestedStack",
+            "Outputs.ApiGatewayResourceMailDashsubscribers"
+          ]
+        },
+        "RestApiId": {
+          "Fn::GetAtt": [
+            "APINestedStack",
+            "Outputs.ApiGatewayRestApi"
+          ]
+        }
+      },
+      "DependsOn": [
+        "APINestedStack"
+      ]
+    },
+    "ApiGatewayMethodItemsOptions": {
+      "Type": "AWS::ApiGateway::Method",
+      "Properties": {
+        "AuthorizationType": "NONE",
+        "HttpMethod": "OPTIONS",
+        "MethodResponses": [
+          {
+            "StatusCode": "200",
+            "ResponseParameters": {
+              "method.response.header.Access-Control-Allow-Origin": true,
+              "method.response.header.Access-Control-Allow-Headers": true,
+              "method.response.header.Access-Control-Allow-Methods": true
+            },
+            "ResponseModels": {}
+          }
+        ],
+        "RequestParameters": {},
+        "Integration": {
+          "Type": "MOCK",
+          "RequestTemplates": {
+            "application/json": "{statusCode:200}"
+          },
+          "ContentHandling": "CONVERT_TO_TEXT",
+          "IntegrationResponses": [
+            {
+              "StatusCode": "200",
+              "ResponseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'",
+                "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent'",
+                "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,GET,POST'"
+              },
+              "ResponseTemplates": {
+                "application/json": ""
+              }
+            }
+          ]
+        },
+        "ResourceId": {
+          "Fn::GetAtt": [
+            "APINestedStack",
+            "Outputs.ApiGatewayResourceItems"
+          ]
+        },
+        "RestApiId": {
+          "Fn::GetAtt": [
+            "APINestedStack",
+            "Outputs.ApiGatewayRestApi"
+          ]
+        }
+      },
+      "DependsOn": [
+        "APINestedStack"
+      ]
+    },
+    "ApiGatewayMethodRolesPost": {
+      "Type": "AWS::ApiGateway::Method",
+      "Properties": {
+        "HttpMethod": "POST",
+        "RequestParameters": {},
+        "ResourceId": {
+          "Fn::GetAtt": [
+            "APINestedStack",
+            "Outputs.ApiGatewayResourceRoles"
+          ]
+        },
+        "RestApiId": {
+          "Fn::GetAtt": [
+            "APINestedStack",
+            "Outputs.ApiGatewayRestApi"
+          ]
+        },
+        "ApiKeyRequired": false,
+        "AuthorizationType": "NONE",
+        "Integration": {
+          "IntegrationHttpMethod": "POST",
+          "Type": "AWS_PROXY",
+          "Uri": {
+            "Fn::Join": [
+              "",
+              [
+                "arn:",
+                {
+                  "Ref": "AWS::Partition"
+                },
+                ":apigateway:",
+                {
+                  "Ref": "AWS::Region"
+                },
+                ":lambda:path/2015-03-31/functions/",
+                {
+                  "Fn::GetAtt": [
+                    "CreateRoleLambdaFunction",
+                    "Arn"
+                  ]
+                },
+                "/invocations"
+              ]
+            ]
+          }
+        },
+        "MethodResponses": [],
+        "RequestValidatorId": {
+          "Ref": "ApiGatewayMrlyonsRequestValidator"
+        },
+        "RequestModels": {
+          "application/json": {
+            "Ref": "ApiGatewayMethodRolesPostApplicationJsonModel"
+          }
+        }
+      },
+      "DependsOn": [
+        "APINestedStack",
+        "PermissionsNestedStack"
+      ]
+    },
+    "ApiGatewayMethodRolesIdVarPut": {
+      "Type": "AWS::ApiGateway::Method",
+      "Properties": {
+        "HttpMethod": "PUT",
+        "RequestParameters": {},
+        "ResourceId": {
+          "Fn::GetAtt": [
+            "APINestedStack",
+            "Outputs.ApiGatewayResourceRolesIdVar"
+          ]
+        },
+        "RestApiId": {
+          "Fn::GetAtt": [
+            "APINestedStack",
+            "Outputs.ApiGatewayRestApi"
+          ]
+        },
+        "ApiKeyRequired": false,
+        "AuthorizationType": "NONE",
+        "Integration": {
+          "IntegrationHttpMethod": "POST",
+          "Type": "AWS_PROXY",
+          "Uri": {
+            "Fn::Join": [
+              "",
+              [
+                "arn:",
+                {
+                  "Ref": "AWS::Partition"
+                },
+                ":apigateway:",
+                {
+                  "Ref": "AWS::Region"
+                },
+                ":lambda:path/2015-03-31/functions/",
+                {
+                  "Fn::GetAtt": [
+                    "UpdateRoleLambdaFunction",
+                    "Arn"
+                  ]
+                },
+                "/invocations"
+              ]
+            ]
+          }
+        },
+        "MethodResponses": [],
+        "RequestValidatorId": {
+          "Ref": "ApiGatewayMrlyonsRequestValidator"
+        },
+        "RequestModels": {
+          "application/json": {
+            "Ref": "ApiGatewayMethodRolesIdVarPutApplicationJsonModel"
+          }
+        }
+      },
+      "DependsOn": [
+        "APINestedStack",
+        "PermissionsNestedStack"
+      ]
+    },
+    "ApiGatewayMethodRolesIdVarDelete": {
+      "Type": "AWS::ApiGateway::Method",
+      "Properties": {
+        "HttpMethod": "DELETE",
+        "RequestParameters": {},
+        "ResourceId": {
+          "Fn::GetAtt": [
+            "APINestedStack",
+            "Outputs.ApiGatewayResourceRolesIdVar"
+          ]
+        },
+        "RestApiId": {
+          "Fn::GetAtt": [
+            "APINestedStack",
+            "Outputs.ApiGatewayRestApi"
+          ]
+        },
+        "ApiKeyRequired": false,
+        "AuthorizationType": "NONE",
+        "Integration": {
+          "IntegrationHttpMethod": "POST",
+          "Type": "AWS_PROXY",
+          "Uri": {
+            "Fn::Join": [
+              "",
+              [
+                "arn:",
+                {
+                  "Ref": "AWS::Partition"
+                },
+                ":apigateway:",
+                {
+                  "Ref": "AWS::Region"
+                },
+                ":lambda:path/2015-03-31/functions/",
+                {
+                  "Fn::GetAtt": [
+                    "DeleteRoleLambdaFunction",
+                    "Arn"
+                  ]
+                },
+                "/invocations"
+              ]
+            ]
+          }
+        },
+        "MethodResponses": []
+      },
+      "DependsOn": [
+        "APINestedStack",
+        "PermissionsNestedStack"
+      ]
+    },
+    "ApiGatewayMethodRolesIdVarGet": {
+      "Type": "AWS::ApiGateway::Method",
+      "Properties": {
+        "HttpMethod": "GET",
+        "RequestParameters": {},
+        "ResourceId": {
+          "Fn::GetAtt": [
+            "APINestedStack",
+            "Outputs.ApiGatewayResourceRolesIdVar"
+          ]
+        },
+        "RestApiId": {
+          "Fn::GetAtt": [
+            "APINestedStack",
+            "Outputs.ApiGatewayRestApi"
+          ]
+        },
+        "ApiKeyRequired": false,
+        "AuthorizationType": "NONE",
+        "Integration": {
+          "IntegrationHttpMethod": "POST",
+          "Type": "AWS_PROXY",
+          "Uri": {
+            "Fn::Join": [
+              "",
+              [
+                "arn:",
+                {
+                  "Ref": "AWS::Partition"
+                },
+                ":apigateway:",
+                {
+                  "Ref": "AWS::Region"
+                },
+                ":lambda:path/2015-03-31/functions/",
+                {
+                  "Fn::GetAtt": [
+                    "GetRoleLambdaFunction",
+                    "Arn"
+                  ]
+                },
+                "/invocations"
+              ]
+            ]
+          }
+        },
+        "MethodResponses": []
+      },
+      "DependsOn": [
+        "APINestedStack",
+        "PermissionsNestedStack"
+      ]
+    },
+    "ApiGatewayMethodRolesGet": {
+      "Type": "AWS::ApiGateway::Method",
+      "Properties": {
+        "HttpMethod": "GET",
+        "RequestParameters": {},
+        "ResourceId": {
+          "Fn::GetAtt": [
+            "APINestedStack",
+            "Outputs.ApiGatewayResourceRoles"
+          ]
+        },
+        "RestApiId": {
+          "Fn::GetAtt": [
+            "APINestedStack",
+            "Outputs.ApiGatewayRestApi"
+          ]
+        },
+        "ApiKeyRequired": false,
+        "AuthorizationType": "NONE",
+        "Integration": {
+          "IntegrationHttpMethod": "POST",
+          "Type": "AWS_PROXY",
+          "Uri": {
+            "Fn::Join": [
+              "",
+              [
+                "arn:",
+                {
+                  "Ref": "AWS::Partition"
+                },
+                ":apigateway:",
+                {
+                  "Ref": "AWS::Region"
+                },
+                ":lambda:path/2015-03-31/functions/",
+                {
+                  "Fn::GetAtt": [
+                    "GetAllRolesLambdaFunction",
+                    "Arn"
+                  ]
+                },
+                "/invocations"
+              ]
+            ]
+          }
+        },
+        "MethodResponses": []
+      },
+      "DependsOn": [
+        "APINestedStack",
+        "PermissionsNestedStack"
+      ]
+    },
+    "ApiGatewayMethodUsersPost": {
+      "Type": "AWS::ApiGateway::Method",
+      "Properties": {
+        "HttpMethod": "POST",
+        "RequestParameters": {},
+        "ResourceId": {
+          "Fn::GetAtt": [
+            "APINestedStack",
+            "Outputs.ApiGatewayResourceUsers"
+          ]
+        },
+        "RestApiId": {
+          "Fn::GetAtt": [
+            "APINestedStack",
+            "Outputs.ApiGatewayRestApi"
+          ]
+        },
+        "ApiKeyRequired": false,
+        "AuthorizationType": "NONE",
+        "Integration": {
+          "IntegrationHttpMethod": "POST",
+          "Type": "AWS_PROXY",
+          "Uri": {
+            "Fn::Join": [
+              "",
+              [
+                "arn:",
+                {
+                  "Ref": "AWS::Partition"
+                },
+                ":apigateway:",
+                {
+                  "Ref": "AWS::Region"
+                },
+                ":lambda:path/2015-03-31/functions/",
+                {
+                  "Fn::GetAtt": [
+                    "AdduserLambdaFunction",
+                    "Arn"
+                  ]
+                },
+                "/invocations"
+              ]
+            ]
+          }
+        },
+        "MethodResponses": [],
+        "RequestValidatorId": {
+          "Ref": "ApiGatewayMrlyonsRequestValidator"
+        },
+        "RequestModels": {
+          "application/json": {
+            "Ref": "ApiGatewayMethodUsersPostApplicationJsonModel"
+          }
+        }
+      },
+      "DependsOn": [
+        "APINestedStack",
+        "PermissionsNestedStack"
+      ]
+    },
+    "ApiGatewayMethodUsersGet": {
+      "Type": "AWS::ApiGateway::Method",
+      "Properties": {
+        "HttpMethod": "GET",
+        "RequestParameters": {},
+        "ResourceId": {
+          "Fn::GetAtt": [
+            "APINestedStack",
+            "Outputs.ApiGatewayResourceUsers"
+          ]
+        },
+        "RestApiId": {
+          "Fn::GetAtt": [
+            "APINestedStack",
+            "Outputs.ApiGatewayRestApi"
+          ]
+        },
+        "ApiKeyRequired": false,
+        "AuthorizationType": "NONE",
+        "Integration": {
+          "IntegrationHttpMethod": "POST",
+          "Type": "AWS_PROXY",
+          "Uri": {
+            "Fn::Join": [
+              "",
+              [
+                "arn:",
+                {
+                  "Ref": "AWS::Partition"
+                },
+                ":apigateway:",
+                {
+                  "Ref": "AWS::Region"
+                },
+                ":lambda:path/2015-03-31/functions/",
+                {
+                  "Fn::GetAtt": [
+                    "GetAllUsersLambdaFunction",
+                    "Arn"
+                  ]
+                },
+                "/invocations"
+              ]
+            ]
+          }
+        },
+        "MethodResponses": []
+      },
+      "DependsOn": [
+        "APINestedStack",
+        "PermissionsNestedStack"
+      ]
+    },
+    "ApiGatewayMethodUsersIdVarGet": {
+      "Type": "AWS::ApiGateway::Method",
+      "Properties": {
+        "HttpMethod": "GET",
+        "RequestParameters": {},
+        "ResourceId": {
+          "Fn::GetAtt": [
+            "APINestedStack",
+            "Outputs.ApiGatewayResourceUsersIdVar"
+          ]
+        },
+        "RestApiId": {
+          "Fn::GetAtt": [
+            "APINestedStack",
+            "Outputs.ApiGatewayRestApi"
+          ]
+        },
+        "ApiKeyRequired": false,
+        "AuthorizationType": "NONE",
+        "Integration": {
+          "IntegrationHttpMethod": "POST",
+          "Type": "AWS_PROXY",
+          "Uri": {
+            "Fn::Join": [
+              "",
+              [
+                "arn:",
+                {
+                  "Ref": "AWS::Partition"
+                },
+                ":apigateway:",
+                {
+                  "Ref": "AWS::Region"
+                },
+                ":lambda:path/2015-03-31/functions/",
+                {
+                  "Fn::GetAtt": [
+                    "GetUserLambdaFunction",
+                    "Arn"
+                  ]
+                },
+                "/invocations"
+              ]
+            ]
+          }
+        },
+        "MethodResponses": []
+      },
+      "DependsOn": [
+        "APINestedStack",
+        "PermissionsNestedStack"
+      ]
+    },
+    "ApiGatewayMethodUsersIdVarPut": {
+      "Type": "AWS::ApiGateway::Method",
+      "Properties": {
+        "HttpMethod": "PUT",
+        "RequestParameters": {},
+        "ResourceId": {
+          "Fn::GetAtt": [
+            "APINestedStack",
+            "Outputs.ApiGatewayResourceUsersIdVar"
+          ]
+        },
+        "RestApiId": {
+          "Fn::GetAtt": [
+            "APINestedStack",
+            "Outputs.ApiGatewayRestApi"
+          ]
+        },
+        "ApiKeyRequired": false,
+        "AuthorizationType": "NONE",
+        "Integration": {
+          "IntegrationHttpMethod": "POST",
+          "Type": "AWS_PROXY",
+          "Uri": {
+            "Fn::Join": [
+              "",
+              [
+                "arn:",
+                {
+                  "Ref": "AWS::Partition"
+                },
+                ":apigateway:",
+                {
+                  "Ref": "AWS::Region"
+                },
+                ":lambda:path/2015-03-31/functions/",
+                {
+                  "Fn::GetAtt": [
+                    "UpdateUserLambdaFunction",
+                    "Arn"
+                  ]
+                },
+                "/invocations"
+              ]
+            ]
+          }
+        },
+        "MethodResponses": [],
+        "RequestValidatorId": {
+          "Ref": "ApiGatewayMrlyonsRequestValidator"
+        },
+        "RequestModels": {
+          "application/json": {
+            "Ref": "ApiGatewayMethodUsersIdVarPutApplicationJsonModel"
+          }
+        }
+      },
+      "DependsOn": [
+        "APINestedStack",
+        "PermissionsNestedStack"
+      ]
+    },
+    "ApiGatewayMethodNewslettersGet": {
+      "Type": "AWS::ApiGateway::Method",
+      "Properties": {
+        "HttpMethod": "GET",
+        "RequestParameters": {},
+        "ResourceId": {
+          "Fn::GetAtt": [
+            "APINestedStack",
+            "Outputs.ApiGatewayResourceNewsletters"
+          ]
+        },
+        "RestApiId": {
+          "Fn::GetAtt": [
+            "APINestedStack",
+            "Outputs.ApiGatewayRestApi"
+          ]
+        },
+        "ApiKeyRequired": false,
+        "AuthorizationType": "NONE",
+        "Integration": {
+          "IntegrationHttpMethod": "POST",
+          "Type": "AWS_PROXY",
+          "Uri": {
+            "Fn::Join": [
+              "",
+              [
+                "arn:",
+                {
+                  "Ref": "AWS::Partition"
+                },
+                ":apigateway:",
+                {
+                  "Ref": "AWS::Region"
+                },
+                ":lambda:path/2015-03-31/functions/",
+                {
+                  "Fn::GetAtt": [
+                    "GetAllNewslettersLambdaFunction",
+                    "Arn"
+                  ]
+                },
+                "/invocations"
+              ]
+            ]
+          }
+        },
+        "MethodResponses": []
+      },
+      "DependsOn": [
+        "APINestedStack",
+        "PermissionsNestedStack"
+      ]
+    },
+    "ApiGatewayMethodNewslettersPost": {
+      "Type": "AWS::ApiGateway::Method",
+      "Properties": {
+        "HttpMethod": "POST",
+        "RequestParameters": {},
+        "ResourceId": {
+          "Fn::GetAtt": [
+            "APINestedStack",
+            "Outputs.ApiGatewayResourceNewsletters"
+          ]
+        },
+        "RestApiId": {
+          "Fn::GetAtt": [
+            "APINestedStack",
+            "Outputs.ApiGatewayRestApi"
+          ]
+        },
+        "ApiKeyRequired": false,
+        "AuthorizationType": "NONE",
+        "Integration": {
+          "IntegrationHttpMethod": "POST",
+          "Type": "AWS_PROXY",
+          "Uri": {
+            "Fn::Join": [
+              "",
+              [
+                "arn:",
+                {
+                  "Ref": "AWS::Partition"
+                },
+                ":apigateway:",
+                {
+                  "Ref": "AWS::Region"
+                },
+                ":lambda:path/2015-03-31/functions/",
+                {
+                  "Fn::GetAtt": [
+                    "PostNewsletterLambdaFunction",
+                    "Arn"
+                  ]
+                },
+                "/invocations"
+              ]
+            ]
+          }
+        },
+        "MethodResponses": [],
+        "RequestValidatorId": {
+          "Ref": "ApiGatewayMrlyonsRequestValidator"
+        },
+        "RequestModels": {
+          "application/json": {
+            "Ref": "ApiGatewayMethodNewslettersPostApplicationJsonModel"
+          }
+        }
+      },
+      "DependsOn": [
+        "APINestedStack",
+        "PermissionsNestedStack"
+      ]
+    },
+    "ApiGatewayMethodNewslettersIdVarDelete": {
+      "Type": "AWS::ApiGateway::Method",
+      "Properties": {
+        "HttpMethod": "DELETE",
+        "RequestParameters": {},
+        "ResourceId": {
+          "Fn::GetAtt": [
+            "APINestedStack",
+            "Outputs.ApiGatewayResourceNewslettersIdVar"
+          ]
+        },
+        "RestApiId": {
+          "Fn::GetAtt": [
+            "APINestedStack",
+            "Outputs.ApiGatewayRestApi"
+          ]
+        },
+        "ApiKeyRequired": false,
+        "AuthorizationType": "NONE",
+        "Integration": {
+          "IntegrationHttpMethod": "POST",
+          "Type": "AWS_PROXY",
+          "Uri": {
+            "Fn::Join": [
+              "",
+              [
+                "arn:",
+                {
+                  "Ref": "AWS::Partition"
+                },
+                ":apigateway:",
+                {
+                  "Ref": "AWS::Region"
+                },
+                ":lambda:path/2015-03-31/functions/",
+                {
+                  "Fn::GetAtt": [
+                    "DeleteNewsletterLambdaFunction",
+                    "Arn"
+                  ]
+                },
+                "/invocations"
+              ]
+            ]
+          }
+        },
+        "MethodResponses": []
+      },
+      "DependsOn": [
+        "APINestedStack",
+        "PermissionsNestedStack"
+      ]
+    },
+    "ApiGatewayMethodNewslettersIdVarPut": {
+      "Type": "AWS::ApiGateway::Method",
+      "Properties": {
+        "HttpMethod": "PUT",
+        "RequestParameters": {},
+        "ResourceId": {
+          "Fn::GetAtt": [
+            "APINestedStack",
+            "Outputs.ApiGatewayResourceNewslettersIdVar"
+          ]
+        },
+        "RestApiId": {
+          "Fn::GetAtt": [
+            "APINestedStack",
+            "Outputs.ApiGatewayRestApi"
+          ]
+        },
+        "ApiKeyRequired": false,
+        "AuthorizationType": "NONE",
+        "Integration": {
+          "IntegrationHttpMethod": "POST",
+          "Type": "AWS_PROXY",
+          "Uri": {
+            "Fn::Join": [
+              "",
+              [
+                "arn:",
+                {
+                  "Ref": "AWS::Partition"
+                },
+                ":apigateway:",
+                {
+                  "Ref": "AWS::Region"
+                },
+                ":lambda:path/2015-03-31/functions/",
+                {
+                  "Fn::GetAtt": [
+                    "EditNewsletterLambdaFunction",
+                    "Arn"
+                  ]
+                },
+                "/invocations"
+              ]
+            ]
+          }
+        },
+        "MethodResponses": [],
+        "RequestValidatorId": {
+          "Ref": "ApiGatewayMrlyonsRequestValidator"
+        },
+        "RequestModels": {
+          "application/json": {
+            "Ref": "ApiGatewayMethodNewslettersIdVarPutApplicationJsonModel"
+          }
+        }
+      },
+      "DependsOn": [
+        "APINestedStack",
+        "PermissionsNestedStack"
+      ]
+    },
+    "ApiGatewayMethodNewslettersIdVarGet": {
+      "Type": "AWS::ApiGateway::Method",
+      "Properties": {
+        "HttpMethod": "GET",
+        "RequestParameters": {},
+        "ResourceId": {
+          "Fn::GetAtt": [
+            "APINestedStack",
+            "Outputs.ApiGatewayResourceNewslettersIdVar"
+          ]
+        },
+        "RestApiId": {
+          "Fn::GetAtt": [
+            "APINestedStack",
+            "Outputs.ApiGatewayRestApi"
+          ]
+        },
+        "ApiKeyRequired": false,
+        "AuthorizationType": "NONE",
+        "Integration": {
+          "IntegrationHttpMethod": "POST",
+          "Type": "AWS_PROXY",
+          "Uri": {
+            "Fn::Join": [
+              "",
+              [
+                "arn:",
+                {
+                  "Ref": "AWS::Partition"
+                },
+                ":apigateway:",
+                {
+                  "Ref": "AWS::Region"
+                },
+                ":lambda:path/2015-03-31/functions/",
+                {
+                  "Fn::GetAtt": [
+                    "GetArticleLambdaFunction",
+                    "Arn"
+                  ]
+                },
+                "/invocations"
+              ]
+            ]
+          }
+        },
+        "MethodResponses": []
+      },
+      "DependsOn": [
+        "APINestedStack",
+        "PermissionsNestedStack"
+      ]
+    },
+    "ApiGatewayMethodRatenewsletterPost": {
+      "Type": "AWS::ApiGateway::Method",
+      "Properties": {
+        "HttpMethod": "POST",
+        "RequestParameters": {},
+        "ResourceId": {
+          "Fn::GetAtt": [
+            "APINestedStack",
+            "Outputs.ApiGatewayResourceRatenewsletter"
+          ]
+        },
+        "RestApiId": {
+          "Fn::GetAtt": [
+            "APINestedStack",
+            "Outputs.ApiGatewayRestApi"
+          ]
+        },
+        "ApiKeyRequired": false,
+        "AuthorizationType": "NONE",
+        "Integration": {
+          "IntegrationHttpMethod": "POST",
+          "Type": "AWS_PROXY",
+          "Uri": {
+            "Fn::Join": [
+              "",
+              [
+                "arn:",
+                {
+                  "Ref": "AWS::Partition"
+                },
+                ":apigateway:",
+                {
+                  "Ref": "AWS::Region"
+                },
+                ":lambda:path/2015-03-31/functions/",
+                {
+                  "Fn::GetAtt": [
+                    "RateNewsletterLambdaFunction",
+                    "Arn"
+                  ]
+                },
+                "/invocations"
+              ]
+            ]
+          }
+        },
+        "MethodResponses": [],
+        "RequestValidatorId": {
+          "Ref": "ApiGatewayMrlyonsRequestValidator"
+        },
+        "RequestModels": {
+          "application/json": {
+            "Ref": "ApiGatewayMethodRatenewsletterPostApplicationJsonModel"
+          }
+        }
+      },
+      "DependsOn": [
+        "APINestedStack",
+        "PermissionsNestedStack"
+      ]
+    },
+    "ApiGatewayMethodMailDashsubscribersPost": {
+      "Type": "AWS::ApiGateway::Method",
+      "Properties": {
+        "HttpMethod": "POST",
+        "RequestParameters": {},
+        "ResourceId": {
+          "Fn::GetAtt": [
+            "APINestedStack",
+            "Outputs.ApiGatewayResourceMailDashsubscribers"
+          ]
+        },
+        "RestApiId": {
+          "Fn::GetAtt": [
+            "APINestedStack",
+            "Outputs.ApiGatewayRestApi"
+          ]
+        },
+        "ApiKeyRequired": false,
+        "AuthorizationType": "NONE",
+        "Integration": {
+          "IntegrationHttpMethod": "POST",
+          "Type": "AWS_PROXY",
+          "Uri": {
+            "Fn::Join": [
+              "",
+              [
+                "arn:",
+                {
+                  "Ref": "AWS::Partition"
+                },
+                ":apigateway:",
+                {
+                  "Ref": "AWS::Region"
+                },
+                ":lambda:path/2015-03-31/functions/",
+                {
+                  "Fn::GetAtt": [
+                    "AddSubscriberLambdaFunction",
+                    "Arn"
+                  ]
+                },
+                "/invocations"
+              ]
+            ]
+          }
+        },
+        "MethodResponses": [],
+        "RequestValidatorId": {
+          "Ref": "ApiGatewayMrlyonsRequestValidator"
+        },
+        "RequestModels": {
+          "application/json": {
+            "Ref": "ApiGatewayMethodMailDashsubscribersPostApplicationJsonModel"
+          }
+        }
+      },
+      "DependsOn": [
+        "APINestedStack",
+        "PermissionsNestedStack"
+      ]
+    },
+    "ApiGatewayMethodMailDashsubscribersGet": {
+      "Type": "AWS::ApiGateway::Method",
+      "Properties": {
+        "HttpMethod": "GET",
+        "RequestParameters": {},
+        "ResourceId": {
+          "Fn::GetAtt": [
+            "APINestedStack",
+            "Outputs.ApiGatewayResourceMailDashsubscribers"
+          ]
+        },
+        "RestApiId": {
+          "Fn::GetAtt": [
+            "APINestedStack",
+            "Outputs.ApiGatewayRestApi"
+          ]
+        },
+        "ApiKeyRequired": false,
+        "AuthorizationType": "NONE",
+        "Integration": {
+          "IntegrationHttpMethod": "POST",
+          "Type": "AWS_PROXY",
+          "Uri": {
+            "Fn::Join": [
+              "",
+              [
+                "arn:",
+                {
+                  "Ref": "AWS::Partition"
+                },
+                ":apigateway:",
+                {
+                  "Ref": "AWS::Region"
+                },
+                ":lambda:path/2015-03-31/functions/",
+                {
+                  "Fn::GetAtt": [
+                    "GetAllMembersLambdaFunction",
+                    "Arn"
+                  ]
+                },
+                "/invocations"
+              ]
+            ]
+          }
+        },
+        "MethodResponses": []
+      },
+      "DependsOn": [
+        "APINestedStack",
+        "PermissionsNestedStack"
+      ]
+    },
+    "ApiGatewayMethodItemsPost": {
+      "Type": "AWS::ApiGateway::Method",
+      "Properties": {
+        "HttpMethod": "POST",
+        "RequestParameters": {},
+        "ResourceId": {
+          "Fn::GetAtt": [
+            "APINestedStack",
+            "Outputs.ApiGatewayResourceItems"
+          ]
+        },
+        "RestApiId": {
+          "Fn::GetAtt": [
+            "APINestedStack",
+            "Outputs.ApiGatewayRestApi"
+          ]
+        },
+        "ApiKeyRequired": false,
+        "AuthorizationType": "NONE",
+        "Integration": {
+          "IntegrationHttpMethod": "POST",
+          "Type": "AWS_PROXY",
+          "Uri": {
+            "Fn::Join": [
+              "",
+              [
+                "arn:",
+                {
+                  "Ref": "AWS::Partition"
+                },
+                ":apigateway:",
+                {
+                  "Ref": "AWS::Region"
+                },
+                ":lambda:path/2015-03-31/functions/",
+                {
+                  "Fn::GetAtt": [
+                    "AddItemLambdaFunction",
+                    "Arn"
+                  ]
+                },
+                "/invocations"
+              ]
+            ]
+          }
+        },
+        "MethodResponses": [],
+        "RequestValidatorId": {
+          "Ref": "ApiGatewayMrlyonsRequestValidator"
+        },
+        "RequestModels": {
+          "application/json": {
+            "Ref": "ApiGatewayMethodItemsPostApplicationJsonModel"
+          }
+        }
+      },
+      "DependsOn": [
+        "APINestedStack",
+        "PermissionsNestedStack"
+      ]
+    },
+    "ApiGatewayMethodItemsGet": {
+      "Type": "AWS::ApiGateway::Method",
+      "Properties": {
+        "HttpMethod": "GET",
+        "RequestParameters": {},
+        "ResourceId": {
+          "Fn::GetAtt": [
+            "APINestedStack",
+            "Outputs.ApiGatewayResourceItems"
+          ]
+        },
+        "RestApiId": {
+          "Fn::GetAtt": [
+            "APINestedStack",
+            "Outputs.ApiGatewayRestApi"
+          ]
+        },
+        "ApiKeyRequired": false,
+        "AuthorizationType": "NONE",
+        "Integration": {
+          "IntegrationHttpMethod": "POST",
+          "Type": "AWS_PROXY",
+          "Uri": {
+            "Fn::Join": [
+              "",
+              [
+                "arn:",
+                {
+                  "Ref": "AWS::Partition"
+                },
+                ":apigateway:",
+                {
+                  "Ref": "AWS::Region"
+                },
+                ":lambda:path/2015-03-31/functions/",
+                {
+                  "Fn::GetAtt": [
+                    "GetAllItemsLambdaFunction",
+                    "Arn"
+                  ]
+                },
+                "/invocations"
+              ]
+            ]
+          }
+        },
+        "MethodResponses": []
+      },
+      "DependsOn": [
+        "APINestedStack",
+        "PermissionsNestedStack"
+      ]
+    },
+    "ApiGatewayMrlyonsRequestValidator": {
+      "Type": "AWS::ApiGateway::RequestValidator",
+      "Properties": {
+        "RestApiId": {
+          "Fn::GetAtt": [
+            "APINestedStack",
+            "Outputs.ApiGatewayRestApi"
+          ]
+        },
+        "ValidateRequestBody": true,
+        "ValidateRequestParameters": true,
+        "Name": "mrlyons-stag | Validate request body and querystring parameters"
+      },
+      "DependsOn": [
+        "APINestedStack"
+      ]
+    },
+    "ApiGatewayMethodRolesPostApplicationJsonModel": {
+      "Type": "AWS::ApiGateway::Model",
+      "Properties": {
+        "RestApiId": {
+          "Fn::GetAtt": [
+            "APINestedStack",
+            "Outputs.ApiGatewayRestApi"
+          ]
+        },
+        "ContentType": "application/json",
+        "Schema": {
+          "type": "object",
+          "properties": {
+            "title": {
+              "type": "string"
+            },
+            "description": {
+              "type": "string"
+            },
+            "permissions": {
+              "type": "array"
+            }
+          },
+          "required": [
+            "title",
+            "description"
+          ]
+        }
+      },
+      "DependsOn": [
+        "APINestedStack"
+      ]
+    },
+    "ApiGatewayMethodRolesIdVarPutApplicationJsonModel": {
+      "Type": "AWS::ApiGateway::Model",
+      "Properties": {
+        "RestApiId": {
+          "Fn::GetAtt": [
+            "APINestedStack",
+            "Outputs.ApiGatewayRestApi"
+          ]
+        },
+        "ContentType": "application/json",
+        "Schema": {
+          "type": "object",
+          "properties": {
+            "title": {
+              "type": "string"
+            },
+            "description": {
+              "type": "string"
+            },
+            "permissions": {
+              "type": "array"
+            }
+          },
+          "required": [
+            "title",
+            "description",
+            "permissions"
+          ]
+        }
+      },
+      "DependsOn": [
+        "APINestedStack"
+      ]
+    },
+    "ApiGatewayMethodUsersPostApplicationJsonModel": {
+      "Type": "AWS::ApiGateway::Model",
+      "Properties": {
+        "RestApiId": {
+          "Fn::GetAtt": [
+            "APINestedStack",
+            "Outputs.ApiGatewayRestApi"
+          ]
+        },
+        "ContentType": "application/json",
+        "Schema": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string"
+            },
+            "firstName": {
+              "type": "string"
+            },
+            "lastName": {
+              "type": "string"
+            },
+            "email": {
+              "type": "string"
+            },
+            "department": {
+              "type": "string"
+            },
+            "roles": {
+              "type": "array"
+            },
+            "avatar": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "id"
+          ]
+        }
+      },
+      "DependsOn": [
+        "APINestedStack"
+      ]
+    },
+    "ApiGatewayMethodUsersIdVarPutApplicationJsonModel": {
+      "Type": "AWS::ApiGateway::Model",
+      "Properties": {
+        "RestApiId": {
+          "Fn::GetAtt": [
+            "APINestedStack",
+            "Outputs.ApiGatewayRestApi"
+          ]
+        },
+        "ContentType": "application/json",
+        "Schema": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string"
+            },
+            "firstName": {
+              "type": "string"
+            },
+            "lastName": {
+              "type": "string"
+            },
+            "email": {
+              "type": "string"
+            },
+            "department": {
+              "type": "string"
+            },
+            "roles": {
+              "type": "array"
+            },
+            "avatar": {
+              "type": "string"
+            },
+            "lastLoggedIn": {
+              "type": "number"
+            },
+            "isActive": {
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "id"
+          ]
+        }
+      },
+      "DependsOn": [
+        "APINestedStack"
+      ]
+    },
+    "ApiGatewayMethodNewslettersPostApplicationJsonModel": {
+      "Type": "AWS::ApiGateway::Model",
+      "Properties": {
+        "RestApiId": {
+          "Fn::GetAtt": [
+            "APINestedStack",
+            "Outputs.ApiGatewayRestApi"
+          ]
+        },
+        "ContentType": "application/json",
+        "Schema": {
+          "type": "object",
+          "properties": {
+            "newsletterid": {
+              "type": "string"
+            },
+            "summary": {
+              "type": "string"
+            },
+            "rating": {
+              "type": "number"
+            },
+            "youtube": {
+              "type": "string"
+            },
+            "status": {
+              "type": "string"
+            },
+            "slug": {
+              "type": "string"
+            },
+            "html": {
+              "type": "string"
+            },
+            "notified": {
+              "type": "boolean"
+            },
+            "author": {
+              "type": "string"
+            },
+            "featuredImageUrl": {
+              "type": "string"
+            },
+            "title": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "html",
+            "featuredImageUrl",
+            "title",
+            "author"
+          ]
+        }
+      },
+      "DependsOn": [
+        "APINestedStack"
+      ]
+    },
+    "ApiGatewayMethodNewslettersIdVarPutApplicationJsonModel": {
+      "Type": "AWS::ApiGateway::Model",
+      "Properties": {
+        "RestApiId": {
+          "Fn::GetAtt": [
+            "APINestedStack",
+            "Outputs.ApiGatewayRestApi"
+          ]
+        },
+        "ContentType": "application/json",
+        "Schema": {
+          "type": "object",
+          "properties": {
+            "summary": {
+              "type": "string"
+            },
+            "youtube": {
+              "type": "string"
+            },
+            "status": {
+              "type": "string"
+            },
+            "slug": {
+              "type": "string"
+            },
+            "html": {
+              "type": "string"
+            },
+            "rating": {
+              "type": "number"
+            },
+            "notified": {
+              "type": "boolean"
+            },
+            "author": {
+              "type": "string"
+            },
+            "featuredImageUrl": {
+              "type": "string"
+            },
+            "title": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "html",
+            "featuredImageUrl",
+            "title",
+            "author"
+          ]
+        }
+      },
+      "DependsOn": [
+        "APINestedStack"
+      ]
+    },
+    "ApiGatewayMethodRatenewsletterPostApplicationJsonModel": {
+      "Type": "AWS::ApiGateway::Model",
+      "Properties": {
+        "RestApiId": {
+          "Fn::GetAtt": [
+            "APINestedStack",
+            "Outputs.ApiGatewayRestApi"
+          ]
+        },
+        "ContentType": "application/json",
+        "Schema": {
+          "type": "object",
+          "properties": {
+            "rating": {
+              "type": "number"
+            },
+            "slug": {
+              "type": "string"
+            },
+            "userId": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "rating",
+            "slug",
+            "userId"
+          ]
+        }
+      },
+      "DependsOn": [
+        "APINestedStack"
+      ]
+    },
+    "ApiGatewayMethodMailDashsubscribersPostApplicationJsonModel": {
+      "Type": "AWS::ApiGateway::Model",
+      "Properties": {
+        "RestApiId": {
+          "Fn::GetAtt": [
+            "APINestedStack",
+            "Outputs.ApiGatewayRestApi"
+          ]
+        },
+        "ContentType": "application/json",
+        "Schema": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "email": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "name",
+            "email"
+          ]
+        }
+      },
+      "DependsOn": [
+        "APINestedStack"
+      ]
+    },
+    "ApiGatewayMethodItemsPostApplicationJsonModel": {
+      "Type": "AWS::ApiGateway::Model",
+      "Properties": {
+        "RestApiId": {
+          "Fn::GetAtt": [
+            "APINestedStack",
+            "Outputs.ApiGatewayRestApi"
+          ]
+        },
+        "ContentType": "application/json",
+        "Schema": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            },
+            "brand": {
+              "type": "string"
+            },
+            "color": {
+              "type": "string"
+            },
+            "size": {
+              "type": "number"
+            },
+            "category": {
+              "type": "string"
+            },
+            "description": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "name"
+          ]
+        }
+      },
+      "DependsOn": [
+        "APINestedStack"
+      ]
+    },
+    "ApiGatewayDeployment1659964218954": {
+      "Type": "AWS::ApiGateway::Deployment",
+      "Properties": {
+        "RestApiId": {
+          "Fn::GetAtt": [
+            "APINestedStack",
+            "Outputs.ApiGatewayRestApi"
+          ]
+        },
+        "StageName": "stag"
+      },
+      "DependsOn": [
+        "ApiGatewayMethodRolesOptions",
+        "ApiGatewayMethodRolesIdVarOptions",
+        "ApiGatewayMethodUsersOptions",
+        "ApiGatewayMethodUsersIdVarOptions",
+        "ApiGatewayMethodNewslettersOptions",
+        "ApiGatewayMethodNewslettersIdVarOptions",
+        "ApiGatewayMethodRatenewsletterOptions",
+        "ApiGatewayMethodMailDashsubscribersOptions",
+        "ApiGatewayMethodItemsOptions",
+        "ApiGatewayMethodRolesPost",
+        "ApiGatewayMethodRolesIdVarPut",
+        "ApiGatewayMethodRolesIdVarDelete",
+        "ApiGatewayMethodRolesIdVarGet",
+        "ApiGatewayMethodRolesGet",
+        "ApiGatewayMethodUsersPost",
+        "ApiGatewayMethodUsersGet",
+        "ApiGatewayMethodUsersIdVarGet",
+        "ApiGatewayMethodUsersIdVarPut",
+        "ApiGatewayMethodNewslettersGet",
+        "ApiGatewayMethodNewslettersPost",
+        "ApiGatewayMethodNewslettersIdVarDelete",
+        "ApiGatewayMethodNewslettersIdVarPut",
+        "ApiGatewayMethodNewslettersIdVarGet",
+        "ApiGatewayMethodRatenewsletterPost",
+        "ApiGatewayMethodMailDashsubscribersPost",
+        "ApiGatewayMethodMailDashsubscribersGet",
+        "ApiGatewayMethodItemsPost",
+        "ApiGatewayMethodItemsGet",
+        "APINestedStack"
+      ]
+    },
+    "RolesTable": {
+      "Type": "AWS::DynamoDB::Table",
+      "DeletionPolicy": "Delete",
+      "Properties": {
+        "TableName": "mrlyons-stag-roles",
+        "BillingMode": "PAY_PER_REQUEST",
+        "AttributeDefinitions": [
+          {
+            "AttributeName": "id",
+            "AttributeType": "S"
+          }
+        ],
+        "KeySchema": [
+          {
+            "AttributeName": "id",
+            "KeyType": "HASH"
+          }
+        ],
+        "PointInTimeRecoverySpecification": {
+          "PointInTimeRecoveryEnabled": true
+        }
+      },
+      "DependsOn": []
+    },
+    "LogsTable": {
+      "Type": "AWS::DynamoDB::Table",
+      "DeletionPolicy": "Delete",
+      "Properties": {
+        "TableName": "mrlyons-stag-logs",
+        "BillingMode": "PAY_PER_REQUEST",
+        "AttributeDefinitions": [
+          {
+            "AttributeName": "id",
+            "AttributeType": "S"
+          }
+        ],
+        "KeySchema": [
+          {
+            "AttributeName": "id",
+            "KeyType": "HASH"
+          }
+        ]
+      },
+      "DependsOn": []
+    },
+    "UsersTable": {
+      "Type": "AWS::DynamoDB::Table",
+      "DeletionPolicy": "Delete",
+      "Properties": {
+        "TableName": "mrlyons-stag-users",
+        "BillingMode": "PAY_PER_REQUEST",
+        "AttributeDefinitions": [
+          {
+            "AttributeName": "id",
+            "AttributeType": "S"
+          }
+        ],
+        "KeySchema": [
+          {
+            "AttributeName": "id",
+            "KeyType": "HASH"
+          }
+        ],
+        "PointInTimeRecoverySpecification": {
+          "PointInTimeRecoveryEnabled": true
+        }
+      },
+      "DependsOn": []
+    },
+    "NewslettersTable": {
+      "Type": "AWS::DynamoDB::Table",
+      "DeletionPolicy": "Delete",
+      "Properties": {
+        "TableName": "mrlyons-stag-newsletter",
+        "BillingMode": "PAY_PER_REQUEST",
+        "AttributeDefinitions": [
+          {
+            "AttributeName": "newsletterId",
+            "AttributeType": "S"
+          },
+          {
+            "AttributeName": "slug",
+            "AttributeType": "S"
+          }
+        ],
+        "KeySchema": [
+          {
+            "AttributeName": "newsletterId",
+            "KeyType": "HASH"
+          }
+        ],
+        "GlobalSecondaryIndexes": [
+          {
+            "IndexName": "slug",
+            "KeySchema": [
+              {
+                "AttributeName": "slug",
+                "KeyType": "HASH"
+              }
+            ],
+            "Projection": {
+              "ProjectionType": "ALL"
+            }
+          }
+        ]
+      },
+      "DependsOn": []
+    },
+    "MailSubscribersTable": {
+      "Type": "AWS::DynamoDB::Table",
+      "DeletionPolicy": "Delete",
+      "Properties": {
+        "TableName": "mrlyons-stag-mailSubscribers",
+        "BillingMode": "PAY_PER_REQUEST",
+        "AttributeDefinitions": [
+          {
+            "AttributeName": "id",
+            "AttributeType": "S"
+          }
+        ],
+        "KeySchema": [
+          {
+            "AttributeName": "id",
+            "KeyType": "HASH"
+          }
+        ]
+      },
+      "DependsOn": []
+    },
+    "ItemsTable": {
+      "Type": "AWS::DynamoDB::Table",
+      "DeletionPolicy": "Delete",
+      "Properties": {
+        "TableName": "mrlyons-stag-items",
+        "BillingMode": "PAY_PER_REQUEST",
+        "AttributeDefinitions": [
+          {
+            "AttributeName": "id",
+            "AttributeType": "S"
+          }
+        ],
+        "KeySchema": [
+          {
+            "AttributeName": "id",
+            "KeyType": "HASH"
+          }
+        ]
+      },
+      "DependsOn": []
+    },
+    "PermissionsNestedStack": {
+      "Type": "AWS::CloudFormation::Stack",
+      "Properties": {
+        "Parameters": {
+          "ApiGatewayRestApiParameter": {
+            "Fn::GetAtt": [
+              "APINestedStack",
+              "Outputs.ApiGatewayRestApi"
+            ]
+          },
+          "CreateRoleLambdaFunctionArnParameter": {
+            "Fn::GetAtt": [
+              "CreateRoleLambdaFunction",
+              "Arn"
+            ]
+          },
+          "UpdateRoleLambdaFunctionArnParameter": {
+            "Fn::GetAtt": [
+              "UpdateRoleLambdaFunction",
+              "Arn"
+            ]
+          },
+          "DeleteRoleLambdaFunctionArnParameter": {
+            "Fn::GetAtt": [
+              "DeleteRoleLambdaFunction",
+              "Arn"
+            ]
+          },
+          "GetRoleLambdaFunctionArnParameter": {
+            "Fn::GetAtt": [
+              "GetRoleLambdaFunction",
+              "Arn"
+            ]
+          },
+          "GetAllRolesLambdaFunctionArnParameter": {
+            "Fn::GetAtt": [
+              "GetAllRolesLambdaFunction",
+              "Arn"
+            ]
+          },
+          "AdduserLambdaFunctionArnParameter": {
+            "Fn::GetAtt": [
+              "AdduserLambdaFunction",
+              "Arn"
+            ]
+          },
+          "GetAllUsersLambdaFunctionArnParameter": {
+            "Fn::GetAtt": [
+              "GetAllUsersLambdaFunction",
+              "Arn"
+            ]
+          },
+          "GetUserLambdaFunctionArnParameter": {
+            "Fn::GetAtt": [
+              "GetUserLambdaFunction",
+              "Arn"
+            ]
+          },
+          "UpdateUserLambdaFunctionArnParameter": {
+            "Fn::GetAtt": [
+              "UpdateUserLambdaFunction",
+              "Arn"
+            ]
+          },
+          "GetAllNewslettersLambdaFunctionArnParameter": {
+            "Fn::GetAtt": [
+              "GetAllNewslettersLambdaFunction",
+              "Arn"
+            ]
+          },
+          "PostNewsletterLambdaFunctionArnParameter": {
+            "Fn::GetAtt": [
+              "PostNewsletterLambdaFunction",
+              "Arn"
+            ]
+          },
+          "DeleteNewsletterLambdaFunctionArnParameter": {
+            "Fn::GetAtt": [
+              "DeleteNewsletterLambdaFunction",
+              "Arn"
+            ]
+          },
+          "EditNewsletterLambdaFunctionArnParameter": {
+            "Fn::GetAtt": [
+              "EditNewsletterLambdaFunction",
+              "Arn"
+            ]
+          },
+          "GetArticleLambdaFunctionArnParameter": {
+            "Fn::GetAtt": [
+              "GetArticleLambdaFunction",
+              "Arn"
+            ]
+          },
+          "RateNewsletterLambdaFunctionArnParameter": {
+            "Fn::GetAtt": [
+              "RateNewsletterLambdaFunction",
+              "Arn"
+            ]
+          },
+          "AddSubscriberLambdaFunctionArnParameter": {
+            "Fn::GetAtt": [
+              "AddSubscriberLambdaFunction",
+              "Arn"
+            ]
+          },
+          "GetAllMembersLambdaFunctionArnParameter": {
+            "Fn::GetAtt": [
+              "GetAllMembersLambdaFunction",
+              "Arn"
+            ]
+          },
+          "AddItemLambdaFunctionArnParameter": {
+            "Fn::GetAtt": [
+              "AddItemLambdaFunction",
+              "Arn"
+            ]
+          },
+          "GetAllItemsLambdaFunctionArnParameter": {
+            "Fn::GetAtt": [
+              "GetAllItemsLambdaFunction",
+              "Arn"
+            ]
+          }
+        },
+        "TemplateURL": {
+          "Fn::Join": [
+            "/",
+            [
+              "https://s3.eu-central-1.amazonaws.com",
+              "turati-serverless-deployments",
+              "serverless/mrlyons/stag/1659964259186-2022-08-08T13:10:59.186Z",
+              "cloudformation-template-Permissions-nested-stack.json"
+            ]
+          ]
+        }
+      },
+      "DependsOn": [
+        "APINestedStack",
+        "CreateRoleLambdaFunction",
+        "UpdateRoleLambdaFunction",
+        "DeleteRoleLambdaFunction",
+        "GetRoleLambdaFunction",
+        "GetAllRolesLambdaFunction",
+        "AdduserLambdaFunction",
+        "GetAllUsersLambdaFunction",
+        "GetUserLambdaFunction",
+        "UpdateUserLambdaFunction",
+        "GetAllNewslettersLambdaFunction",
+        "PostNewsletterLambdaFunction",
+        "DeleteNewsletterLambdaFunction",
+        "EditNewsletterLambdaFunction",
+        "GetArticleLambdaFunction",
+        "RateNewsletterLambdaFunction",
+        "AddSubscriberLambdaFunction",
+        "GetAllMembersLambdaFunction",
+        "AddItemLambdaFunction",
+        "GetAllItemsLambdaFunction"
+      ]
+    },
+    "APINestedStack": {
+      "Type": "AWS::CloudFormation::Stack",
+      "Properties": {
+        "Parameters": {},
+        "TemplateURL": {
+          "Fn::Join": [
+            "/",
+            [
+              "https://s3.eu-central-1.amazonaws.com",
+              "turati-serverless-deployments",
+              "serverless/mrlyons/stag/1659964259186-2022-08-08T13:10:59.186Z",
+              "cloudformation-template-API-nested-stack.json"
+            ]
+          ]
+        }
+      }
+    },
+    "VersionsNestedStack": {
+      "Type": "AWS::CloudFormation::Stack",
+      "Properties": {
+        "Parameters": {
+          "CreateRoleLambdaFunctionParameter": {
+            "Ref": "CreateRoleLambdaFunction"
+          },
+          "UpdateRoleLambdaFunctionParameter": {
+            "Ref": "UpdateRoleLambdaFunction"
+          },
+          "DeleteRoleLambdaFunctionParameter": {
+            "Ref": "DeleteRoleLambdaFunction"
+          },
+          "GetRoleLambdaFunctionParameter": {
+            "Ref": "GetRoleLambdaFunction"
+          },
+          "GetAllRolesLambdaFunctionParameter": {
+            "Ref": "GetAllRolesLambdaFunction"
+          },
+          "AdduserLambdaFunctionParameter": {
+            "Ref": "AdduserLambdaFunction"
+          },
+          "GetAllUsersLambdaFunctionParameter": {
+            "Ref": "GetAllUsersLambdaFunction"
+          },
+          "GetUserLambdaFunctionParameter": {
+            "Ref": "GetUserLambdaFunction"
+          },
+          "UpdateUserLambdaFunctionParameter": {
+            "Ref": "UpdateUserLambdaFunction"
+          },
+          "GetAllNewslettersLambdaFunctionParameter": {
+            "Ref": "GetAllNewslettersLambdaFunction"
+          },
+          "PostNewsletterLambdaFunctionParameter": {
+            "Ref": "PostNewsletterLambdaFunction"
+          },
+          "DeleteNewsletterLambdaFunctionParameter": {
+            "Ref": "DeleteNewsletterLambdaFunction"
+          },
+          "EditNewsletterLambdaFunctionParameter": {
+            "Ref": "EditNewsletterLambdaFunction"
+          },
+          "GetArticleLambdaFunctionParameter": {
+            "Ref": "GetArticleLambdaFunction"
+          },
+          "RateNewsletterLambdaFunctionParameter": {
+            "Ref": "RateNewsletterLambdaFunction"
+          },
+          "AddSubscriberLambdaFunctionParameter": {
+            "Ref": "AddSubscriberLambdaFunction"
+          },
+          "GetAllMembersLambdaFunctionParameter": {
+            "Ref": "GetAllMembersLambdaFunction"
+          },
+          "AddItemLambdaFunctionParameter": {
+            "Ref": "AddItemLambdaFunction"
+          },
+          "GetAllItemsLambdaFunctionParameter": {
+            "Ref": "GetAllItemsLambdaFunction"
+          }
+        },
+        "TemplateURL": {
+          "Fn::Join": [
+            "/",
+            [
+              "https://s3.eu-central-1.amazonaws.com",
+              "turati-serverless-deployments",
+              "serverless/mrlyons/stag/1659964259186-2022-08-08T13:10:59.186Z",
+              "cloudformation-template-Versions-nested-stack.json"
+            ]
+          ]
+        }
+      },
+      "DependsOn": [
+        "CreateRoleLambdaFunction",
+        "UpdateRoleLambdaFunction",
+        "DeleteRoleLambdaFunction",
+        "GetRoleLambdaFunction",
+        "GetAllRolesLambdaFunction",
+        "AdduserLambdaFunction",
+        "GetAllUsersLambdaFunction",
+        "GetUserLambdaFunction",
+        "UpdateUserLambdaFunction",
+        "GetAllNewslettersLambdaFunction",
+        "PostNewsletterLambdaFunction",
+        "DeleteNewsletterLambdaFunction",
+        "EditNewsletterLambdaFunction",
+        "GetArticleLambdaFunction",
+        "RateNewsletterLambdaFunction",
+        "AddSubscriberLambdaFunction",
+        "GetAllMembersLambdaFunction",
+        "AddItemLambdaFunction",
+        "GetAllItemsLambdaFunction"
+      ]
+    }
+  },
+  "Outputs": {
+    "ServerlessDeploymentBucketName": {
+      "Value": "turati-serverless-deployments",
+      "Export": {
+        "Name": "sls-mrlyons-stag-ServerlessDeploymentBucketName"
+      }
+    },
+    "CreateRoleLambdaFunctionQualifiedArn": {
+      "Description": "Current Lambda function version",
+      "Value": {
+        "Fn::GetAtt": [
+          "VersionsNestedStack",
+          "Outputs.CreateRoleLambdaVersionhpZyYQgndQECwwalVZJpZBQPyOagsqXyqCW3mOcD61I"
+        ]
+      },
+      "Export": {
+        "Name": "sls-mrlyons-stag-CreateRoleLambdaFunctionQualifiedArn"
+      }
+    },
+    "UpdateRoleLambdaFunctionQualifiedArn": {
+      "Description": "Current Lambda function version",
+      "Value": {
+        "Fn::GetAtt": [
+          "VersionsNestedStack",
+          "Outputs.UpdateRoleLambdaVersionEwX6uKs8JnGWLZq1bp8L8M84w1E6ZT3wCOsDb71QAk"
+        ]
+      },
+      "Export": {
+        "Name": "sls-mrlyons-stag-UpdateRoleLambdaFunctionQualifiedArn"
+      }
+    },
+    "DeleteRoleLambdaFunctionQualifiedArn": {
+      "Description": "Current Lambda function version",
+      "Value": {
+        "Fn::GetAtt": [
+          "VersionsNestedStack",
+          "Outputs.DeleteRoleLambdaVersion7pFXgbVTzsDx2bNVWVvURhgG46GwXqIShxhNunnDzc"
+        ]
+      },
+      "Export": {
+        "Name": "sls-mrlyons-stag-DeleteRoleLambdaFunctionQualifiedArn"
+      }
+    },
+    "GetRoleLambdaFunctionQualifiedArn": {
+      "Description": "Current Lambda function version",
+      "Value": {
+        "Fn::GetAtt": [
+          "VersionsNestedStack",
+          "Outputs.GetRoleLambdaVersionvxnQaF5C5yh3sVj72E3mlqgVWqDMpjqsRiuVtGb87g"
+        ]
+      },
+      "Export": {
+        "Name": "sls-mrlyons-stag-GetRoleLambdaFunctionQualifiedArn"
+      }
+    },
+    "GetAllRolesLambdaFunctionQualifiedArn": {
+      "Description": "Current Lambda function version",
+      "Value": {
+        "Fn::GetAtt": [
+          "VersionsNestedStack",
+          "Outputs.GetAllRolesLambdaVersionNtHCBE96f9PUCIeRu8CCxti3dpKQWeVVm3mQzCyNFc"
+        ]
+      },
+      "Export": {
+        "Name": "sls-mrlyons-stag-GetAllRolesLambdaFunctionQualifiedArn"
+      }
+    },
+    "AdduserLambdaFunctionQualifiedArn": {
+      "Description": "Current Lambda function version",
+      "Value": {
+        "Fn::GetAtt": [
+          "VersionsNestedStack",
+          "Outputs.AdduserLambdaVersionPb6yJHkdtDFIkfCeu0yYOzSdKaNaqyGBVF7Lfc"
+        ]
+      },
+      "Export": {
+        "Name": "sls-mrlyons-stag-AdduserLambdaFunctionQualifiedArn"
+      }
+    },
+    "GetAllUsersLambdaFunctionQualifiedArn": {
+      "Description": "Current Lambda function version",
+      "Value": {
+        "Fn::GetAtt": [
+          "VersionsNestedStack",
+          "Outputs.GetAllUsersLambdaVersionbKttq6fnZQvugpBZGux7vQG9UmPhatlb0yOb73cno"
+        ]
+      },
+      "Export": {
+        "Name": "sls-mrlyons-stag-GetAllUsersLambdaFunctionQualifiedArn"
+      }
+    },
+    "GetUserLambdaFunctionQualifiedArn": {
+      "Description": "Current Lambda function version",
+      "Value": {
+        "Fn::GetAtt": [
+          "VersionsNestedStack",
+          "Outputs.GetUserLambdaVersionptxLvNG1tsZBInlA4PIuOjDvnKJSsvxurOY8jU7Suk"
+        ]
+      },
+      "Export": {
+        "Name": "sls-mrlyons-stag-GetUserLambdaFunctionQualifiedArn"
+      }
+    },
+    "UpdateUserLambdaFunctionQualifiedArn": {
+      "Description": "Current Lambda function version",
+      "Value": {
+        "Fn::GetAtt": [
+          "VersionsNestedStack",
+          "Outputs.UpdateUserLambdaVersionvLupVyjuDMdwWOR5BhR4vKvLuhcAlYiEJShKyqlEhY"
+        ]
+      },
+      "Export": {
+        "Name": "sls-mrlyons-stag-UpdateUserLambdaFunctionQualifiedArn"
+      }
+    },
+    "GetAllNewslettersLambdaFunctionQualifiedArn": {
+      "Description": "Current Lambda function version",
+      "Value": {
+        "Fn::GetAtt": [
+          "VersionsNestedStack",
+          "Outputs.GetAllNewslettersLambdaVersion48mbWcTg5H8wE4ERTqxByS4seehsjNFFnlso6xB4s"
+        ]
+      },
+      "Export": {
+        "Name": "sls-mrlyons-stag-GetAllNewslettersLambdaFunctionQualifiedArn"
+      }
+    },
+    "PostNewsletterLambdaFunctionQualifiedArn": {
+      "Description": "Current Lambda function version",
+      "Value": {
+        "Fn::GetAtt": [
+          "VersionsNestedStack",
+          "Outputs.PostNewsletterLambdaVersionFI4K8xi0jyojArpN27GDtc0CmtKkAhylccoYhewz04"
+        ]
+      },
+      "Export": {
+        "Name": "sls-mrlyons-stag-PostNewsletterLambdaFunctionQualifiedArn"
+      }
+    },
+    "DeleteNewsletterLambdaFunctionQualifiedArn": {
+      "Description": "Current Lambda function version",
+      "Value": {
+        "Fn::GetAtt": [
+          "VersionsNestedStack",
+          "Outputs.DeleteNewsletterLambdaVersioncWeLWim700MyXLhMEZmOrFPstUkkbltRuna88rfWI"
+        ]
+      },
+      "Export": {
+        "Name": "sls-mrlyons-stag-DeleteNewsletterLambdaFunctionQualifiedArn"
+      }
+    },
+    "EditNewsletterLambdaFunctionQualifiedArn": {
+      "Description": "Current Lambda function version",
+      "Value": {
+        "Fn::GetAtt": [
+          "VersionsNestedStack",
+          "Outputs.EditNewsletterLambdaVersionmj0lTVVfy7SCHazjLpxHb5ILEqzlZ7AYmusfYwFXxw"
+        ]
+      },
+      "Export": {
+        "Name": "sls-mrlyons-stag-EditNewsletterLambdaFunctionQualifiedArn"
+      }
+    },
+    "GetArticleLambdaFunctionQualifiedArn": {
+      "Description": "Current Lambda function version",
+      "Value": {
+        "Fn::GetAtt": [
+          "VersionsNestedStack",
+          "Outputs.GetArticleLambdaVersionan6gzw1NVTI2jZDSVoQI5vdalH1zfrUGRUl5CkHDOM"
+        ]
+      },
+      "Export": {
+        "Name": "sls-mrlyons-stag-GetArticleLambdaFunctionQualifiedArn"
+      }
+    },
+    "RateNewsletterLambdaFunctionQualifiedArn": {
+      "Description": "Current Lambda function version",
+      "Value": {
+        "Fn::GetAtt": [
+          "VersionsNestedStack",
+          "Outputs.RateNewsletterLambdaVersionEddQXNkxq1T2fVSjBvEG4srdJDODBsUDvI9GSLdmjnU"
+        ]
+      },
+      "Export": {
+        "Name": "sls-mrlyons-stag-RateNewsletterLambdaFunctionQualifiedArn"
+      }
+    },
+    "AddSubscriberLambdaFunctionQualifiedArn": {
+      "Description": "Current Lambda function version",
+      "Value": {
+        "Fn::GetAtt": [
+          "VersionsNestedStack",
+          "Outputs.AddSubscriberLambdaVersionznqAhpmUjhm2wM3gXKPTKFhyoxqwXIsnuHhFY2eGM"
+        ]
+      },
+      "Export": {
+        "Name": "sls-mrlyons-stag-AddSubscriberLambdaFunctionQualifiedArn"
+      }
+    },
+    "GetAllMembersLambdaFunctionQualifiedArn": {
+      "Description": "Current Lambda function version",
+      "Value": {
+        "Fn::GetAtt": [
+          "VersionsNestedStack",
+          "Outputs.GetAllMembersLambdaVersionopEVjLhxwF2sfc2vJxZhNxpBqGf7KYiDQnC4RSmNA8"
+        ]
+      },
+      "Export": {
+        "Name": "sls-mrlyons-stag-GetAllMembersLambdaFunctionQualifiedArn"
+      }
+    },
+    "AddItemLambdaFunctionQualifiedArn": {
+      "Description": "Current Lambda function version",
+      "Value": {
+        "Fn::GetAtt": [
+          "VersionsNestedStack",
+          "Outputs.AddItemLambdaVersionYaPiqYHph2EEg8H9Cft8tlTJV96cKS2fJd9S4DXSe0"
+        ]
+      },
+      "Export": {
+        "Name": "sls-mrlyons-stag-AddItemLambdaFunctionQualifiedArn"
+      }
+    },
+    "GetAllItemsLambdaFunctionQualifiedArn": {
+      "Description": "Current Lambda function version",
+      "Value": {
+        "Fn::GetAtt": [
+          "VersionsNestedStack",
+          "Outputs.GetAllItemsLambdaVersion2nqgmYhssaH5ptLJUgpF0KXXF9MnSZYIxkyNonKa9Q"
+        ]
+      },
+      "Export": {
+        "Name": "sls-mrlyons-stag-GetAllItemsLambdaFunctionQualifiedArn"
+      }
+    },
+    "ServiceEndpoint": {
+      "Description": "URL of the service endpoint",
+      "Value": {
+        "Fn::Join": [
+          "",
+          [
+            "https://",
+            {
+              "Fn::GetAtt": [
+                "APINestedStack",
+                "Outputs.ApiGatewayRestApi"
+              ]
+            },
+            ".execute-api.",
+            {
+              "Ref": "AWS::Region"
+            },
+            ".",
+            {
+              "Ref": "AWS::URLSuffix"
+            },
+            "/stag"
+          ]
+        ]
+      },
+      "Export": {
+        "Name": "sls-mrlyons-stag-ServiceEndpoint"
+      }
+    }
+  }
+}
